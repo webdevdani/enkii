@@ -1,20 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components/macro';
+
+import formContainerStyles from 'styles/mixins/formContainer';
+import SignInForm from './SignInForm';
+
+const Main = styled.main`
+    ${props => formContainerStyles(props)}
+`;
 
 const SignIn = (props) => {
     return (
-        <div>
-            Sign In
-        </div>
+        <Main>
+            <h1>Sign In</h1>
+            <SignInForm />
+        </Main>
     );
 }
-
-SignIn.propTypes = {
-
-};
-
-SignIn.defaultProps = {
-
-};
 
 export default SignIn;

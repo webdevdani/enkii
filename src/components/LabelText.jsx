@@ -13,4 +13,4 @@ LabelText.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export default Input;
+export default LabelText;
