@@ -1,13 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+
 import ThemeProvider from 'styles/ThemeProvider';
+import GlobalStyles from 'styles/GlobalStyles';
+import Router from 'components/compounds/Router';
 
 const App = (props) => (
-    <Router>
-        <ThemeProvider>
-            <h1>Apppp</h1>
-        </ThemeProvider>
-    </Router>
+    <ThemeProvider>
+        <React.Fragment>
+            <GlobalStyles />
+            <Router />
+        </React.Fragment>
+    </ThemeProvider>
 );
 
 export default App;

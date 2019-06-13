@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as ROUTES from 'constants/routes';
 
 import Landing from 'components/compounds/Landing';
@@ -12,13 +12,15 @@ import Admin from 'components/compounds/Admin';
 
 const Router = () => (
     <BrowserRouter>
-        <Route exact path={ROUTES.LANDING} component={Landing} />
-        <Route path={ROUTES.SIGN_UP} component={SignUp} />
-        <Route path={ROUTES.SIGN_IN} component={SignIn} />
-        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-        <Route path={ROUTES.HOME} component={Home} />
-        <Route path={ROUTES.ACCOUNT} component={Account} />
-        <Route path={ROUTES.ADMIN} component={Admin} />
+        <Switch>
+            <Route exact path={ROUTES.LANDING} component={Landing} />
+            <Route path={ROUTES.SIGN_UP} component={SignUp} />
+            <Route path={ROUTES.SIGN_IN} component={SignIn} />
+            <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+            <Route path={ROUTES.HOME} component={Home} />
+            <Route path={ROUTES.ACCOUNT} component={Account} />
+            <Route path={ROUTES.ADMIN} component={Admin} />
+        </Switch>
     </BrowserRouter>
 );
 
