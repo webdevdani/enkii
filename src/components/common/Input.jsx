@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 
 import inputContainerStyles from 'styles/mixins/inputContainer';
 
-import LabelText from 'components/LabelText';
+import LabelText from 'components/common/LabelText';
 
 const StyledInput = styled.input`
     padding: ${props => props.theme.paddingS};
