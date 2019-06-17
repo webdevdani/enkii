@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Landing = (props) => {
     return (
@@ -8,13 +7,5 @@ const Landing = (props) => {
         </div>
     );
 }
-
-Landing.propTypes = {
-
-};
-
-Landing.defaultProps = {
-
-};
 
 export default Landing;

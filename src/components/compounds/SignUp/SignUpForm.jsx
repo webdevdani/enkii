@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
 
-const SignInForm = (props) => {
+const SignUpForm = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     return (
         <form>
@@ -14,7 +15,7 @@ const SignInForm = (props) => {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 type="email"
-                autoComplete="username"
+                autoComplete="email"
                 required
             />
             <Input
@@ -22,14 +23,21 @@ const SignInForm = (props) => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 type="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
+                required
+            />
+            <Input
+                label="Confirm Password"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                type="password"
                 required
             />
             <div>
-                <Button type="submit">Sign In</Button>
+                <Button fullWidth type="submit">Sign Up</Button>
             </div>
         </form>
     );
 };
 
-export default SignInForm;
+export default SignUpForm;

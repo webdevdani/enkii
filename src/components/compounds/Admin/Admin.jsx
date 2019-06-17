@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Admin = (props) => {
     return (
@@ -8,13 +7,5 @@ const Admin = (props) => {
         </div>
     );
 }
-
-Admin.propTypes = {
-
-};
-
-Admin.defaultProps = {
-
-};
 
 export default Admin;

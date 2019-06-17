@@ -7,6 +7,7 @@ const Button = styled.button`
     color: ${props => props.theme.lightFontColor};
     border-radius: ${props => props.theme.borderRadius};
     padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
+    ${props => props.fullWidth ? `width: 100%;` : ''}
 `;
 
 export default Button;
