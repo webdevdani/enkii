@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import inputContainerStyles from 'styles/mixins/inputContainer';
+import errorMessageStyles from 'styles/mixins/errorMessage';
 
 import LabelText from 'components/common/LabelText';
 
@@ -18,9 +19,18 @@ const StyledLabel = styled.label`
     ${props => inputContainerStyles(props)}
 `;
 
-const Input = ({ label, ...inputProps }) => (
+const ErrorMessage = styled.p`
+    ${props => errorMessageStyles(props)}
+`;
+
+const Input = ({ label, error, ...inputProps }) => (
     <StyledLabel>
-        <LabelText>{label}</LabelText>
+        <div>
+            <LabelText>{label}</LabelText>
+            {error &&
+                <ErrorMessage>{error}</ErrorMessage>
+            }
+        </div>
         <StyledInput {...inputProps} />
     </StyledLabel>
 );
@@ -29,6 +39,11 @@ Input.propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
+    error: PropTypes.string,
+};
+
+Input.defaultProps = {
+    error: null,
 };
 
 export default Input;

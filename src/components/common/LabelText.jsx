@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components/macro';
 
-const LabelText = styled.span`
+const LabelText = styled.p`
     margin-bottom: 0.5em;
-    display: block;
     font-weight: 600;
 `;
 

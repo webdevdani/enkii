@@ -6,6 +6,7 @@ export default {
     fontColor: '#041839',
     lightFontColor: '#FFFFFF',
     accentColor: '#673ab7',
+    errorColor: '#F44336',
     borderRadius: '4px',
     borderColor,
     baseBorder: `1px solid ${borderColor}`,
