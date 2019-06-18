@@ -15,6 +15,7 @@ export {
 
 const Headline = styled.h1`
     ${props => headlineStyles(props)}
+    ${props => props.noMargin ? 'margin: 0;' : ''}
 `;
 
 // To use other headline levels, use styled-components `as`
@@ -26,10 +27,12 @@ Headline.propTypes = {
         SIZE_MEDIUM,
         SIZE_LARGE,
     ]),
+    noMargin: PropTypes.bool,
 };
 
 Headline.defaultProps = {
     size: SIZE_MEDIUM,
+    noMargin: false,
 };
 
 export default Headline;

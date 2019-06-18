@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useFirebase } from 'modules/Firebase';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
+import WarningDialog from 'components/common/WarningDialog';
 
 const EMAIL = 'email';
 const PASSWORD = 'password';
@@ -11,6 +12,7 @@ const CONFIRM_PASSWORD = 'confirmPassword';
 const SignUpForm = (props) => {
     const firebase = useFirebase();
     const [errors, setErrors] = useState({});
+    const [networkError, setNetworkError] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -40,50 +42,65 @@ const SignUpForm = (props) => {
             setErrors(newErrors);
         } else {
             firebase.doCreateUserWithEmailAndPassword(email, password)
-                .then();
-            // TODO: handle any errors back from firebase
+                .then((user) => {
+                    user && user.updateProfile({ displayName: name });
+                    // redirect to home?
+                })
+                .catch((error) => {
+                    error && error.message && setNetworkError(error.message);
+                });
         }
     };
 
     return (
-        <form onSubmit={handleFormSubmit}>
-            <Input
-                label="Display Name"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                type="text"
-            />
-            <Input
-                label="E-mail (Required)"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                type="email"
-                autoComplete="email"
-                error={errors[EMAIL] || null}
-                required
-            />
-            <Input
-                label="Password (Required)"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                type="password"
-                autoComplete="new-password"
-                error={errors[PASSWORD] || null}
-                required
-            />
-            <Input
-                label="Confirm Password (Required)"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                type="password"
-                error={errors[CONFIRM_PASSWORD] || null}
-                required
-            />
-            <div>
-                <Button fullWidth type="submit">Sign Up</Button>
-            </div>
-        </form>
+        <React.Fragment>
+            <form onSubmit={handleFormSubmit}>
+                <Input
+                    label="Display Name"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    type="text"
+                />
+                <Input
+                    label="E-mail (Required)"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    type="email"
+                    autoComplete="email"
+                    error={errors[EMAIL] || null}
+                    required
+                />
+                <Input
+                    label="Password (Required)"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    type="password"
+                    autoComplete="new-password"
+                    error={errors[PASSWORD] || null}
+                    required
+                />
+                <Input
+                    label="Confirm Password (Required)"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    type="password"
+                    error={errors[CONFIRM_PASSWORD] || null}
+                    required
+                />
+                <div>
+                    <Button fullWidth type="submit">Sign Up</Button>
+                </div>
+            </form>
+            {networkError &&
+                <WarningDialog
+                    message={networkError}
+                    onRequestClose={() => setNetworkError('')}
+                />
+            }
+        </React.Fragment>
     );
 };
+
+// TO-DO: If error code "auth/email-already-in-use", pass button to go to password reset
 
 export default SignUpForm;

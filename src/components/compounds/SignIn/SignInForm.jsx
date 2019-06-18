@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useFirebase } from 'modules/Firebase';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
+import WarningDialog from 'components/common/WarningDialog';
 
 const EMAIL = 'email';
 const PASSWORD = 'password';
@@ -12,6 +13,7 @@ const SignInForm = (props) => {
     const [errors, setErrors] = useState({});
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [networkError, setNetworkError] = useState('');
 
     const handleFormSubmit = (e) => {
         const newErrors = { ...errors };
@@ -31,14 +33,20 @@ const SignInForm = (props) => {
 
         // Submit the form, or show the inline validation
         if (!hasError) {
-            firebase.doSignInWithEmailAndPassword(email, password);
-            // TODO: handle any errors back from firebase
+            firebase.doSignInWithEmailAndPassword(email, password)
+                .then((user) => {
+                    // redirect to home?
+                })
+                .catch((error) => {
+                    error && error.message && setNetworkError(error.message);
+                });
         } else {
             setErrors(newErrors);
         }
     }
 
     return (
+        <React.Fragment>
         <form onSubmit={handleFormSubmit}>
             <Input
                 label="E-mail"
@@ -62,6 +70,13 @@ const SignInForm = (props) => {
                 <Button fullWidth type="submit">Sign In</Button>
             </div>
         </form>
+        {networkError &&
+            <WarningDialog
+                message={networkError}
+                onRequestClose={() => setNetworkError('')}
+            />
+        }
+        </React.Fragment>
     );
 };
 
