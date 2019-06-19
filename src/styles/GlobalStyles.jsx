@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
     table, caption, tbody, tfoot, thead, tr, th, td,
     article, aside, canvas, details, embed,
     figure, figcaption, footer, header, hgroup,
-    menu, nav, output, ruby, section, summary,
+    main, menu, nav, output, ruby, section, summary,
     time, mark, audio, video {
         margin: 0;
         padding: 0;
@@ -63,6 +63,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${props => props.theme.fontFamily};
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    input {
+        box-sizing: border-box;
     }
 `;
 

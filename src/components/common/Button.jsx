@@ -1,10 +1,10 @@
 import styled from 'styled-components/macro';
 
 const Button = styled.button`
-    font-size: 1rem;
-    background-color: ${props => props.theme.accentColor};
+    font-size: 0.75rem;
+    background-color: ${props => props.secondary ? 'transparent' : props.theme.accentColor};
     border: 1px solid ${props => props.theme.accentColor};
-    color: ${props => props.theme.lightFontColor};
+    color: ${props => props.secondary ? props.theme.accentColor : props.theme.lightFontColor};
     border-radius: ${props => props.theme.borderRadius};
     padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
     ${props => props.fullWidth ? `width: 100%;` : ''}
