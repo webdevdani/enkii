@@ -43,8 +43,10 @@ const SignUpForm = (props) => {
         } else {
             firebase.doCreateUserWithEmailAndPassword(email, password)
                 .then((user) => {
-                    user && user.updateProfile({ displayName: name });
-                    // redirect to home?
+                    if (user) {
+                        const displayName = name || email.substring(0, email.indexOf('@'));
+                        user.updateProfile({ displayName });
+                    }
                 })
                 .catch((error) => {
                     error && error.message && setNetworkError(error.message);
