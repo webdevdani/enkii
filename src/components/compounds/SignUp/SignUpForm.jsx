@@ -56,13 +56,13 @@ const SignUpForm = (props) => {
         <React.Fragment>
             <form onSubmit={handleFormSubmit}>
                 <Input
-                    label="Display Name"
+                    label="Display Name (Optional)"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     type="text"
                 />
                 <Input
-                    label="E-mail (Required)"
+                    label="E-mail"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     type="email"
@@ -71,7 +71,7 @@ const SignUpForm = (props) => {
                     required
                 />
                 <Input
-                    label="Password (Required)"
+                    label="Password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     type="password"
@@ -80,7 +80,7 @@ const SignUpForm = (props) => {
                     required
                 />
                 <Input
-                    label="Confirm Password (Required)"
+                    label="Confirm Password"
                     value={confirmPassword}
                     onChange={e => setConfirmPassword(e.target.value)}
                     type="password"

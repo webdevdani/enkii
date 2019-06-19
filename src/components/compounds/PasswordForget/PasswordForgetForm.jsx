@@ -6,13 +6,11 @@ import Button from 'components/common/Button';
 import WarningDialog from 'components/common/WarningDialog';
 
 const EMAIL = 'email';
-const PASSWORD = 'password';
 
 const SignInForm = (props) => {
     const firebase = useFirebase();
     const [errors, setErrors] = useState({});
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [networkError, setNetworkError] = useState('');
 
     const handleFormSubmit = (e) => {
@@ -26,16 +24,11 @@ const SignInForm = (props) => {
             hasError = true;
         }
 
-        if (!password) {
-            newErrors[PASSWORD] = 'A password is required';
-            hasError = true;
-        }
-
         // Submit the form, or show the inline validation
         if (!hasError) {
-            firebase.doSignInWithEmailAndPassword(email, password)
-                .then((user) => {
-                    // redirect to home?
+            firebase.doPasswordReset(email)
+                .then(() => {
+                    setEmail(''); // empty the form
                 })
                 .catch((error) => {
                     error && error.message && setNetworkError(error.message);
@@ -57,17 +50,8 @@ const SignInForm = (props) => {
                     error={errors[EMAIL] || null}
                     required
                 />
-                <Input
-                    label="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    type="password"
-                    autoComplete="current-password"
-                    error={errors[PASSWORD] || null}
-                    required
-                />
                 <div>
-                    <Button fullWidth type="submit">Sign In</Button>
+                    <Button fullWidth type="submit">Reset your Password</Button>
                 </div>
             </form>
             {networkError &&

@@ -6,8 +6,9 @@ import {
     SIGN_UP,
     SIGN_IN,
     PASSWORD_FORGET,
+    HOME,
 } from 'constants/routes';
-
+import withAuthorization from 'modules/Authorization';
 import Navigation from 'components/compounds/Navigation';
 
 import Landing from 'components/compounds/Landing';
@@ -30,5 +31,7 @@ const PublicPage = () => (
     </React.Fragment>
 );
 
-export default PublicPage;
+const condition = authUser => authUser ? HOME : null;
+
+export default withAuthorization(condition)(PublicPage);
 
