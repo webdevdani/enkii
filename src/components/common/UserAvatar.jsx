@@ -5,21 +5,26 @@ import styled from 'styled-components/macro';
 
 import getPublicIdFromCloudinaryUrl from 'utils/getPublicIdFromCloudinaryUrl';
 
+export const SIZE_SMALL = 50;
+export const SIZE_MEDIUM = 100;
+
 const ImageWrapper = styled.div`
-    width: 100px;
-    height: 100px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
     background-color: ${props => props.theme.accentColor};
     border-radius: 100%;
     border: ${props => props.theme.baseBorder};
     overflow: hidden;
 `;
 
-const UserAvatar = ({ photoUrl }) => {
+const UserAvatar = ({ photoUrl, size }) => {
     return (
-        <ImageWrapper>
+        <ImageWrapper size={size}>
             {photoUrl &&
                 <Image publicId={getPublicIdFromCloudinaryUrl(photoUrl)}>
-                    <Transformation width="100" height="100" gravity="face" crop="thumb" />
+                    <Transformation width={size} height={size} gravity="face" crop="thumb" />
                 </Image>
             }
         </ImageWrapper>
@@ -28,10 +33,12 @@ const UserAvatar = ({ photoUrl }) => {
 
 UserAvatar.propTypes = {
     photoUrl: PropTypes.string,
+    size: PropTypes.number,
 };
 
 UserAvatar.defaultProps = {
     photoUrl: null,
+    size: SIZE_MEDIUM,
 };
 
 export default UserAvatar;

@@ -8,6 +8,7 @@ const Button = styled.button`
     border-radius: ${props => props.theme.borderRadius};
     padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
     ${props => props.fullWidth ? `width: 100%;` : ''}
+    line-height: 1;
 `;
 
 export default Button;

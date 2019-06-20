@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { useFirebase } from 'modules/Firebase';
+import { useGrowlSystem } from 'components/compounds/GrowlSystem';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
 import WarningDialog from 'components/common/WarningDialog';
+import { SIGN_IN } from 'constants/routes';
 
 const EMAIL = 'email';
+const SUCCESS_MESSAGE = 'Check your email for a password recovery link';
 
 const SignInForm = (props) => {
     const firebase = useFirebase();
+    const showGrowlMessage = useGrowlSystem();
     const [errors, setErrors] = useState({});
     const [email, setEmail] = useState('');
     const [networkError, setNetworkError] = useState('');
@@ -28,7 +33,8 @@ const SignInForm = (props) => {
         if (!hasError) {
             firebase.doPasswordReset(email)
                 .then(() => {
-                    setEmail(''); // empty the form
+                    showGrowlMessage(SUCCESS_MESSAGE);
+                    props.history.push(SIGN_IN);
                 })
                 .catch((error) => {
                     error && error.message && setNetworkError(error.message);
@@ -42,7 +48,7 @@ const SignInForm = (props) => {
         <React.Fragment>
             <form onSubmit={handleFormSubmit}>
                 <Input
-                    label="E-mail"
+                    label="Email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     type="email"
@@ -64,4 +70,4 @@ const SignInForm = (props) => {
     );
 };
 
-export default SignInForm;
+export default withRouter(SignInForm);

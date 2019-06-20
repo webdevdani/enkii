@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { SIGN_OUT } from 'constants/routes';
+import Sidebar from 'components/compounds/Sidebar';
+
 
 const Wrapper = styled.div`
     display: flex;
@@ -18,16 +19,23 @@ const MainContentWrapper = styled.main`
     min-height: 100vh;
 `;
 
-const LeftSidebar = ({ children }) => (
+const LeftSidebar = ({ children, sidebarContent }) => (
     <Wrapper>
-        <section style={{ width: '4rem', backgroundColor: '#EEE', fontSize: '0.5rem' }}>
-            <Link to={SIGN_OUT}>Sign Out</Link>
-        </section>
+        <Sidebar sidebarContent={sidebarContent}/>
         <MainContentWrapper>
             {children}
         </MainContentWrapper>
     </Wrapper>
 );
+
+LeftSidebar.propTypes = {
+    children: PropTypes.node.isRequired,
+    sidebarContent: PropTypes.element,
+};
+
+LeftSidebar.defaultProps = {
+    sidebarContent: null,
+};
 
 export default LeftSidebar;
 

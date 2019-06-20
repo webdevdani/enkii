@@ -4,6 +4,7 @@ export default {
     rootFontSize: '22px',
     fontFamily: 'Arial, sans-serif',
     fontColor: '#041839',
+    subTextColor: '#868997',
     lightFontColor: '#FFFFFF',
     accentColor: '#673ab7',
     errorColor: '#F44336',

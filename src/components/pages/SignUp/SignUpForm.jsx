@@ -42,10 +42,10 @@ const SignUpForm = (props) => {
             setErrors(newErrors);
         } else {
             firebase.doCreateUserWithEmailAndPassword(email, password)
-                .then((user) => {
-                    if (user) {
+                .then((authUser) => {
+                    if (authUser && authUser.user) {
                         const displayName = name || email.substring(0, email.indexOf('@'));
-                        user.updateProfile({ displayName });
+                        authUser.user.updateProfile({ displayName });
                     }
                 })
                 .catch((error) => {

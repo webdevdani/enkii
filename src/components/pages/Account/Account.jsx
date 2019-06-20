@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import withAuthorization from 'modules/Authorization';
-import { SIGN_IN } from 'constants/routes';
+import { SIGN_IN, APP } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import AccountHeader from './AccountHeader';
 import AccountView from './AccountView';
@@ -11,7 +12,11 @@ const Account = (props) => {
     const [isEditingAccount, setIsEditingAccount] = useState(false);
 
     return (
-        <LeftSidebar>
+        <LeftSidebar
+            sidebarContent={
+                <Link to={APP}>Home</Link>
+            }
+        >
             <AccountHeader
                 isEditingAccount={isEditingAccount}
                 setIsEditingAccount={setIsEditingAccount}

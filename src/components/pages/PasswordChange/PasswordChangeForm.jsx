@@ -20,8 +20,6 @@ const PasswordChangeForm = (props) => {
     const [networkError, setNetworkError] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
-    console.log(user);
-
     const handleFormSubmit = (e) => {
         const newErrors = { ...errors };
         let hasError = false;
