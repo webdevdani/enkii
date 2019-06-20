@@ -6,8 +6,8 @@ import { APP } from 'constants/routes';
 import TopNavigation from 'components/templates/TopNavigation';
 import Headline, { SIZE_LARGE } from 'components/common/Headline';
 import formContainerStyles from 'styles/mixins/formContainer';
+import SignInForm from 'components/compounds/SignInForm';
 
-import SignInForm from './SignInForm';
 import ForgottenPasswordText from './ForgottenPasswordText';
 
 const Wrapper = styled.div`

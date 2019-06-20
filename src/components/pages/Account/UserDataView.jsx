@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import { useAuthUser } from 'modules/AuthUser';
 import Headline, { SIZE_LARGE, SIZE_SMALL } from 'components/common/Headline';
-import Button from 'components/common/Button';
 import UserAvatar from 'components/common/UserAvatar';
 
 const Section = styled.section`
@@ -19,7 +17,6 @@ const TopSection = styled.div`
 
 const UserDataView = (props) => {
     const user = useAuthUser();
-    console.log(user);
 
     return (
         <Section>
@@ -33,13 +30,5 @@ const UserDataView = (props) => {
         </Section>
     );
 }
-
-UserDataView.propTypes = {
-
-};
-
-UserDataView.defaultProps = {
-
-};
 
 export default UserDataView;

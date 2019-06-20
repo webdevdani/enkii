@@ -22,7 +22,7 @@ const AccountHeader = ({isEditingAccount, setIsEditingAccount }) => {
         <Header>
             <ButtonGroup>
                 <Button secondary onClick={() => setIsEditingAccount(!isEditingAccount)}>
-                    {isEditingAccount ? 'Cancel' : 'Edit Profile'}
+                    {isEditingAccount ? 'Cancel' : 'Edit Account'}
                 </Button>
                 <Link to={SIGN_OUT}>
                     <Button>Sign Out</Button>

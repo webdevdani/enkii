@@ -11,6 +11,7 @@ export default {
     baseLineHeight: '1.4',
     borderColor,
     baseBorder: `1px solid ${borderColor}`,
+    baseBoxShadow: '0px 3px 15px -1px rgba(0,0,0,0.67)',
 
     // Padding
     paddingXs: '0.25rem',

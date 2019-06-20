@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import { useAuthUser } from 'modules/AuthUser';
-import Headline, { SIZE_LARGE, SIZE_SMALL } from 'components/common/Headline';
+import Headline from 'components/common/Headline';
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import UserAvatar from 'components/common/UserAvatar';

@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import { PASSWORD_CHANGE } from 'constants/routes';
 
 import Button from 'components/common/Button';
 import UserDataView from './UserDataView';
@@ -8,7 +10,9 @@ const AccountView = (props) => {
     return (
         <React.Fragment>
             <UserDataView />
-            <Button secondary>Change Password</Button>
+            <Link to={PASSWORD_CHANGE}>
+                <Button secondary>Change Password</Button>
+            </Link>
         </React.Fragment>
     );
 }
