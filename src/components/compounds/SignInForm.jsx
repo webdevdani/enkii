@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { useFirebase } from 'modules/Firebase';
 import Input from 'components/common/Input';
@@ -35,7 +36,7 @@ const SignInForm = (props) => {
         if (!hasError) {
             firebase.doSignInWithEmailAndPassword(email, password)
                 .then((user) => {
-                    // redirect to home?
+                    props.onFormSubmit();
                 })
                 .catch((error) => {
                     error && error.message && setNetworkError(error.message);
@@ -78,6 +79,14 @@ const SignInForm = (props) => {
             }
         </React.Fragment>
     );
+};
+
+SignInForm.propTypes = {
+    onFormSubmit: PropTypes.func.isRequired,
+};
+
+SignInForm.defaultProps = {
+    onFormSubmit: () => {},
 };
 
 export default SignInForm;

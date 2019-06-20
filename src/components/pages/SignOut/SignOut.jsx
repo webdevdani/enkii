@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import withAuthorization from 'modules/Authorization';
 import { LANDING } from 'constants/routes';
@@ -10,7 +9,7 @@ const SignOut = (props) => {
 
     useEffect(() => {
         firebase.doSignOut();
-    }, []);
+    }, [firebase]);
 
     return null;
 }

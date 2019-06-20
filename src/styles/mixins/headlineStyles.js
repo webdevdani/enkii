@@ -14,7 +14,7 @@ const headlineStyles = (props) => {
     } else if (props.size === LARGE) {
         return `
             font-size: 2rem;
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
         `;
     } else {
         return `

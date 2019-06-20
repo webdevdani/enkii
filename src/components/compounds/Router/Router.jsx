@@ -9,6 +9,7 @@ import SignOut from 'components/pages/SignOut';
 import PasswordForget from 'components/pages/PasswordForget';
 import AppHome from 'components/pages/AppHome';
 import Account from 'components/pages/Account';
+import PasswordChange from 'components/pages/PasswordChange';
 import Admin from 'components/pages/Admin';
 
 const Router = () => (
@@ -21,6 +22,7 @@ const Router = () => (
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
             <Route path={ROUTES.APP} component={AppHome} />
             <Route path={ROUTES.ACCOUNT} component={Account} />
+            <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChange} />
             <Route path={ROUTES.ADMIN} component={Admin} />
         </Switch>
     </BrowserRouter>

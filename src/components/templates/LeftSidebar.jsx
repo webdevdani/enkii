@@ -10,14 +10,22 @@ const Wrapper = styled.div`
     min-height: 100vh;
 `;
 
+const MainContentWrapper = styled.main`
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: ${props => props.theme.paddingM};
+    min-height: 100vh;
+`;
+
 const LeftSidebar = ({ children }) => (
     <Wrapper>
         <section style={{ width: '4rem', backgroundColor: '#EEE', fontSize: '0.5rem' }}>
             <Link to={SIGN_OUT}>Sign Out</Link>
         </section>
-        <main>
+        <MainContentWrapper>
             {children}
-        </main>
+        </MainContentWrapper>
     </Wrapper>
 );
 
