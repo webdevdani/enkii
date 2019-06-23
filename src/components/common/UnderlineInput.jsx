@@ -8,6 +8,7 @@ import SideLabelInputWrapper from 'components/common/SideLabelInputWrapper';
 
 const TextArea = styled(TextareaAutosize)`
     ${props => underlineInputStyles(props)}
+    resize: none;
     width: 100%;
 `;
 
@@ -16,11 +17,11 @@ const SingleLine = styled.input`
     width: 100%;
 `;
 
-const UnderlineInput = ({ label, grows, ...inputProps }) => {
-    const Input = grows ? TextArea : SingleLine;
+const UnderlineInput = ({ label, grow, hideLabel, ...inputProps }) => {
+    const Input = grow ? TextArea : SingleLine;
 
     return (
-        <SideLabelInputWrapper label={label}>
+        <SideLabelInputWrapper label={label} hideLabel={hideLabel}>
             <Input {...inputProps} />
         </SideLabelInputWrapper>
     );
@@ -30,11 +31,11 @@ UnderlineInput.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    grows: PropTypes.bool,
+    grow: PropTypes.bool,
 };
 
 UnderlineInput.defaultProps = {
-    grows: false,
+    grow: false,
 };
 
 export default UnderlineInput;

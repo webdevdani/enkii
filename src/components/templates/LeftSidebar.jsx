@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const MainContentWrapper = styled.main`
     width: 100%;
-    max-width: 1000px;
+    max-width: 30rem;
     margin: auto;
     padding: ${props => props.theme.paddingM};
     min-height: 100vh;

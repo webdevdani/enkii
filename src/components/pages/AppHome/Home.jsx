@@ -5,12 +5,9 @@ import { SIGN_IN } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import NewListSidebarButton from './NewListSidebarButton';
 
-import UnderlineInput from 'components/common/UnderlineInput';
+import ListEditor from 'components/compounds/ListEditor';
 
 const Home = (props) => {
-    const [val, setVal] = useState('');
-    const [valTwo, setValTwo] = useState('');
-    const [valThree, setValThree] = useState('');
 
     return (
         <LeftSidebar
@@ -19,21 +16,7 @@ const Home = (props) => {
             }
         >
             <div>
-                <UnderlineInput
-                    label="Title"
-                    value={valTwo}
-                    onChange={(e) => setValTwo(e.target.value)}
-                />
-                <UnderlineInput
-                    label="URL"
-                    value={valThree}
-                    onChange={(e) => setValThree(e.target.value)}
-                />
-                <UnderlineInput
-                    label="Description"
-                    value={val}
-                    onChange={(e) => setVal(e.target.value)}
-                />
+                <ListEditor listItems={[{}, {}, {}]} />
             </div>
         </LeftSidebar>
     );
