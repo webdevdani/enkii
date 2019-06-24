@@ -6,6 +6,15 @@ import Headline from 'components/common/Headline';
 import UnderlineInput from 'components/common/UnderlineInput';
 import ImageUploadButton from 'components/common/ImageUploadButton';
 
+import listItemSchema, {
+    listItemPropType,
+    TITLE,
+    URL,
+    IMAGE_URL,
+    DESCRIPTION,
+    ORDER,
+} from '../module/listItemSchema';
+
 const FormSection = styled.section`
     padding-bottom: ${props => props.theme.paddingL};
     display: flex;
@@ -23,36 +32,38 @@ const InputContainer = styled.div`
 `;
 
 const ListItemForm = (props) => {
-    const [val, setVal] = useState('');
-    const [valTwo, setValTwo] = useState('');
-    const [valThree, setValThree] = useState('');
-
+    const listItemName = `listItem_${props.order}`;
     return (
-        <FormSection name={`listItem_${props.order}`}>
+        <FormSection name={listItemName}>
             <HeaderContainer>
-                <Headline as="h2">{`${props.order}.`}</Headline>
+                <Headline as="h2">{`${props[ORDER]}.`}</Headline>
             </HeaderContainer>
             <InputContainer>
                 <UnderlineInput
                     label="Title"
-                    value={valTwo}
-                    onChange={(e) => setValTwo(e.target.value)}
-                    hideLabel
+                    name={`${listItemName} ${TITLE}`}
+                    value={props[TITLE]}
+                    onChange={(e) => props.onChange({ [TITLE]: e.target.value })}
                     style={{ fontWeight: 'bold' }}
                     placeholder="Title"
+                    hideLabel
                     grow
                 />
                 <UnderlineInput
                     label="URL"
-                    value={valThree}
-                    onChange={(e) => setValThree(e.target.value)}
+                    name={`${listItemName} ${URL}`}
+                    value={props[URL]}
+                    onChange={(e) => props.onChange({ [URL]: e.target.value })}
                     placeholder="(Optional)"
                 />
-                <ImageUploadButton />
+                <ImageUploadButton
+                    name={`${listItemName} ${IMAGE_URL}`}
+                />
                 <UnderlineInput
                     label="Description"
-                    value={val}
-                    onChange={(e) => setVal(e.target.value)}
+                    name={`${listItemName} ${DESCRIPTION}`}
+                    value={props[DESCRIPTION]}
+                    onChange={(e) => props.onChange({ [DESCRIPTION]: e.target.value })}
                     grow
                 />
             </InputContainer>
@@ -61,11 +72,19 @@ const ListItemForm = (props) => {
 }
 
 ListItemForm.propTypes = {
-    order: PropTypes.number.isRequired,
+    [ORDER]: listItemPropType[ORDER].isRequired,
+    [TITLE]: listItemPropType[TITLE],
+    [URL]: listItemPropType[URL],
+    [IMAGE_URL]: listItemPropType[IMAGE_URL],
+    [DESCRIPTION]: listItemPropType[DESCRIPTION],
+    onChange: PropTypes.func.isRequired,
 };
 
 ListItemForm.defaultProps = {
-
+    [TITLE]: listItemSchema[TITLE],
+    [URL]: listItemSchema[URL],
+    [IMAGE_URL]: listItemSchema[IMAGE_URL],
+    [DESCRIPTION]: listItemSchema[DESCRIPTION],
 };
 
 export default ListItemForm;

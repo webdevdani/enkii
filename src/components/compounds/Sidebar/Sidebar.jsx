@@ -14,7 +14,6 @@ const SidebarWrapper = styled.aside`
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
     height: 100vh;
 `;
 

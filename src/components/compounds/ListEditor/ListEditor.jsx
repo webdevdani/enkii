@@ -1,24 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ListItemForm from './components/ListItemForm';
+import Loader from 'components/common/Loader';
+import ListEditorForm from './components/ListEditorForm';
+import useListEditor from './useListEditor';
 
 const ListEditor = (props) => {
-    return (
-        <form>
-            {props.listItems.map((listItem, order) => (
-                <ListItemForm order={order + 1} />
-            ))}
-        </form>
-    );
+    const { list } = useListEditor();
+
+    return list ?
+        <ListEditorForm {...list} /> :
+        <Loader />;
 }
-
-ListEditor.propTypes = {
-    listItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-ListEditor.defaultProps = {
-
-};
 
 export default ListEditor;

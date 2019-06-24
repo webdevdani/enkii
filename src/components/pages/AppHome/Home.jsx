@@ -5,7 +5,7 @@ import { SIGN_IN } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import NewListSidebarButton from './NewListSidebarButton';
 
-import ListEditor from 'components/compounds/ListEditor';
+import ListEditor, { ListEditorProvider } from 'components/compounds/ListEditor';
 
 const Home = (props) => {
 
@@ -15,9 +15,9 @@ const Home = (props) => {
                 <NewListSidebarButton onClick={() => {}}/>
             }
         >
-            <div>
-                <ListEditor listItems={[{}, {}, {}]} />
-            </div>
+            <ListEditorProvider>
+                <ListEditor />
+            </ListEditorProvider>
         </LeftSidebar>
     );
 }
