@@ -19,18 +19,20 @@ const UploadButton = styled.button`
 
 const ImageUploadButton = (props) => {
     return (
-        <SideLabelInputWrapper label="Image">
-            <UploadButton>Add Image</UploadButton>
+        <SideLabelInputWrapper label={props.label}>
+            <UploadButton>{props.buttonText}</UploadButton>
         </SideLabelInputWrapper>
     );
 }
 
 ImageUploadButton.propTypes = {
-
+    label: PropTypes.string,
+    buttonText: PropTypes.string,
 };
 
 ImageUploadButton.defaultProps = {
-
+    label: 'Image',
+    buttonText: 'Add Image',
 };
 
 export default ImageUploadButton;

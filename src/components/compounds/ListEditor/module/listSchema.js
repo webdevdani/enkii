@@ -13,7 +13,6 @@ export const TYPE_UL = 'unordered';
 
 export const listPropType = {
     [TITLE]: PropTypes.string,
-    [URL]: PropTypes.string,
     [IMAGE_URL]: PropTypes.string,
     [DESCRIPTION]: PropTypes.string,
     [TYPE]: PropTypes.oneOf([

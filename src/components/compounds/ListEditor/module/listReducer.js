@@ -33,6 +33,7 @@ const listReducer = (state = null, action) => {
                 ],
             };
         case DELETE_LIST_ITEM:
+            // handling the last list item?
             return removeListItem(state, action.order);
         case UPDATE_LIST_ITEM:
             return updateListItem(state, action.order, action.value);

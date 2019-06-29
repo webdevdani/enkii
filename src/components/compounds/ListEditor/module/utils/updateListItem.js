@@ -22,3 +22,5 @@ export default function updateListItem(list, listItemOrder, listItemUpdate) {
     };
 }
 
+/* after getting id from firebase, normalize list? Be more performant to update
+by id, than recreating the object each time */

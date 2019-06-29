@@ -4,18 +4,8 @@ import styled from 'styled-components/macro';
 
 import visuallyHiddenStyles from 'styles/mixins/visuallyHidden';
 
-const Label = styled.label`
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1.5rem;
-
-    &:focus-within span {
-        color: ${props => props.theme.darkBorderColor};
-    }
-`;
-
 const LabelText = styled.span`
-    min-width: 4rem;
+    min-width: 4.5rem;
     font-size: 0.75rem;
     padding-top: ${props => props.theme.paddingS};
     margin-right: 0.75rem;
@@ -26,11 +16,23 @@ const LabelText = styled.span`
     ${props => props.hideLabel ? visuallyHiddenStyles(props) : ''}
 `;
 
-const SideLabelInputWrapper = ({ label, children, hideLabel }) => {
+const Label = styled.label`
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+
+    &:focus-within ${LabelText} {
+        color: ${props => props.theme.darkBorderColor};
+    }
+`;
+
+const SideLabelInputWrapper = (props) => {
     return (
-        <Label>
-            <LabelText hideLabel={hideLabel}>{ label }</LabelText>
-            { children }
+        <Label as={props.labelAs}>
+            <LabelText hideLabel={props.hideLabel} as={props.labelTextAs}>
+                {props.label}
+            </LabelText>
+            { props.children }
         </Label>
     );
 }
@@ -39,10 +41,15 @@ SideLabelInputWrapper.propTypes = {
     children: PropTypes.node.isRequired,
     label: PropTypes.string.isRequired,
     hideLabel: PropTypes.bool,
+    // For rendering other HTML elements, like fieldsets & legends
+    labelAs: PropTypes.string,
+    labelTextAs: PropTypes.string,
 };
 
 SideLabelInputWrapper.defaultProps = {
     hideLabel: false,
+    labelAs: null,
+    labelTextAs: null,
 };
 
 export default SideLabelInputWrapper;
