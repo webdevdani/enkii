@@ -5,8 +5,6 @@ import { SIGN_IN } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import NewListSidebarButton from './NewListSidebarButton';
 
-import ListEditor, { ListEditorProvider } from 'components/compounds/ListEditor';
-
 const Home = (props) => {
 
     return (
@@ -15,9 +13,7 @@ const Home = (props) => {
                 <NewListSidebarButton onClick={() => {}}/>
             }
         >
-            <ListEditorProvider>
-                <ListEditor />
-            </ListEditorProvider>
+            <h1>home</h1>
         </LeftSidebar>
     );
 }

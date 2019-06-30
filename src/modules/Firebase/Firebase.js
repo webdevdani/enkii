@@ -1,6 +1,10 @@
-import app from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
+
+import { OWNER } from 'constants/roles';
+import listSchema, { LIST_ITEMS } from 'constants/schemas/list';
+import listItemSchema, { ORDER } from 'constants/schemas/listItem';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,14 +18,13 @@ const config = {
 // Database Keys
 const USERS = 'users';
 const LISTS = 'lists';
-const LIST_ITEMS = 'listItems';
 
 class Firebase {
     constructor() {
-        app.initializeApp(config);
+        firebase.initializeApp(config);
 
-        this.auth = app.auth();
-        this.db = app.database();
+        this.auth = firebase.auth();
+        this.db = firebase.firestore();
     }
 
     /* *** Auth API *** */
@@ -42,36 +45,25 @@ class Firebase {
         this.auth.currentUser.updatePassword(password)
     );
 
-    getAuthedUserId = () => this.auth.currentUser ? this.auth.currentUser.id : null;
+    getAuthedUserId = () => this.auth.currentUser ? this.auth.currentUser.uid : null;
 
 
     /* *** Writing data *** */
 
-    createNewList = () => {
-        const userId = this.getAuthedUserId();
-        const newListItemsId = this.db.ref(LIST_ITEMS).push().key;
-
-        const newListId = this.db.ref(LISTS).push({
-            [LIST_ITEMS]: newListItemsId,
-            users: {
-                [userId]: 'creator',
-            },
-        }).key;
-
-        const updates = {};
-
-        // Set the list on the list items set
-        updates[`/${LIST_ITEMS}/${newListItemsId}/list`] = newListId;
-
-        // Associate the list to the user
-        updates[`/${USERS}/${userId}/${LISTS}/${newListId}`] = 'creator';
-
-        this.db.ref().update(updates);
+    createNewList = (userId) => {
+        return this.db.collection(LISTS).add({
+            ...listSchema,
+            user: userId,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            [LIST_ITEMS]: [{
+                ...listItemSchema,
+                [ORDER]: 1,
+            }],
+        }).then(listRef => listRef.get());
     };
 
     saveList = (listId, data) => {
-        // save list
-        // & save list items
+
     };
 
     deleteList = (listId) => {
@@ -80,17 +72,19 @@ class Firebase {
         // remove listItem
     };
 
+    createNewListItem = (listId, order) => {
+
+    };
+
     updateListItems = (listItemsId, data) => {
-        // save list items
+
     };
 
 
     /* *** Reading data *** */
 
     getList = (listId) => {
-        // get list
-        // get list items
-        // get user?
+        return this.db.collection(LISTS).doc(listId).get();
     };
 
     getUsersLists = (userId) => {

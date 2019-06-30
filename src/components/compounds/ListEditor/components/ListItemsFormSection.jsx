@@ -8,7 +8,7 @@ import ListItemForm from './ListItemForm';
 const ListItemsFormSection = (props) => {
     return (
         <section name="list items">
-            {props.listItems.map(listItem => (
+            {props.listItems && props.listItems.map(listItem => (
                 <ListItemForm
                     onChange={(info) => props.onChange(listItem.order, info)}
                     key={listItem.order}
