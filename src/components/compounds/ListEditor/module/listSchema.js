@@ -4,7 +4,7 @@ import listItemSchema, { listItemPropType, ORDER } from './listItemSchema';
 
 export const TITLE = 'title';
 export const IMAGE_URL = 'imageUrl';
-export const DESCRIPTION = 'description';
+export const DESCRIPTION = 'desc';
 export const TYPE = 'type';
 export const LIST_ITEMS = 'listItems';
 

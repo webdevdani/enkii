@@ -53,13 +53,15 @@ class Firebase {
     createNewList = (userId) => {
         return this.db.collection(LISTS).add({
             ...listSchema,
-            user: userId,
+            user: userId || this.getAuthedUserId(),
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             [LIST_ITEMS]: [{
                 ...listItemSchema,
                 [ORDER]: 1,
             }],
         }).then(listRef => listRef.get());
+        // need to associate the list to the user?
+        // or get collection where userId = authed user?
     };
 
     saveList = (listId, data) => {

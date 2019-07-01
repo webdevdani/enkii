@@ -12,6 +12,7 @@ import EditList from 'components/pages/EditList';
 import Account from 'components/pages/Account';
 import PasswordChange from 'components/pages/PasswordChange';
 import Admin from 'components/pages/Admin';
+import PageNotFound from 'components/pages/PageNotFound';
 
 const Router = () => (
     <BrowserRouter>
@@ -21,11 +22,12 @@ const Router = () => (
             <Route path={ROUTES.SIGN_UP} component={SignUp} />
             <Route path={ROUTES.SIGN_OUT} component={SignOut} />
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-            <Route path={ROUTES.APP} component={AppHome} />
-            <Route path={ROUTES.EDIT_LIST} component={EditList} />
+            <Route exact path={ROUTES.APP} component={AppHome} />
+            <Route path={[ROUTES.EDIT_LIST, ROUTES.CREATE_LIST]} component={EditList} />
             <Route path={ROUTES.ACCOUNT} component={Account} />
             <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChange} />
             <Route path={ROUTES.ADMIN} component={Admin} />
+            <Route component={PageNotFound} />
         </Switch>
     </BrowserRouter>
 );

@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useFirebase } from 'modules/Firebase';
+import { useAuthUser } from 'modules/AuthUser';
 import { useGrowlSystem } from 'components/compounds/GrowlSystem';
 import ListEditorContext from '../context';
 import listReducer, { SET_LIST } from '../module/listReducer';
@@ -10,21 +11,43 @@ const ListEditorProvider = (props) => {
     const [list, dispatch] = useReducer(listReducer);
     const showGrowlMessage = useGrowlSystem();
     const firebase = useFirebase();
+    const authUser = useAuthUser();
 
     useEffect(() => {
-        // fetch list if id passed, create new one if not
-        if (!props.id) {
-            firebase.createNewList()
+        if (list) {
+            // In case of redirect after creating new list,
+            // dont re-fetch the list if we already have it
+            return;
+        }
+
+        // need to handle list not existing!!!
+
+        if (props.id) {
+            firebase.getList(props.id)
                 .then((list) => {
-                    dispatch({ type: SET_LIST, value: list.data() });
+                    dispatch({
+                        type: SET_LIST,
+                        value: {
+                            ...list.data(),
+                            id: list.id,
+                        },
+                    });
                 })
                 .catch((err) => {
                     err && err.message && showGrowlMessage(err.message);
                 });
         } else {
-            firebase.getList(props.id)
+            firebase.createNewList(authUser.uid)
                 .then((list) => {
-                    dispatch({ type: SET_LIST, value: list.data() });
+                    dispatch({
+                        type: SET_LIST,
+                        value: {
+                            ...list.data(),
+                            id: list.id,
+                        },
+                    });
+
+                    props.onCreateNewList(list.id);
                 })
                 .catch((err) => {
                     err && err.message && showGrowlMessage(err.message);
@@ -42,10 +65,12 @@ const ListEditorProvider = (props) => {
 ListEditorProvider.propTypes = {
     children: PropTypes.node.isRequired,
     id: PropTypes.string,
+    onCreateNewList: PropTypes.func,
 };
 
 ListEditorProvider.defaultProps = {
     id: null,
+    onCreateNewList: () => {},
 };
 
 export default ListEditorProvider;
