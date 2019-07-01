@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { generatePath } from 'react-router-dom';
 
-import { SIGN_IN, EDIT_LIST } from 'constants/routes';
+import { SIGN_IN, EDIT_LIST, PAGE_NOT_FOUND } from 'constants/routes';
 import withAuthorization from 'modules/Authorization';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import ListEditor, { ListEditorProvider } from 'components/compounds/ListEditor';
@@ -12,9 +12,10 @@ const EditList = (props) => {
         <ListEditorProvider
             id={props.match.params.id}
             onCreateNewList={id => props.history.replace(generatePath(EDIT_LIST, { id }))}
+            onListNotExisting={() => props.history.push(PAGE_NOT_FOUND)}
         >
             <LeftSidebar
-                sidebarContent={'hi'}
+                sidebarContent={<p>hi</p>}
             >
                     <ListEditor />
             </LeftSidebar>
@@ -33,6 +34,7 @@ EditList.propTypes = {
     }),
     history: PropTypes.shape({
         replace: PropTypes.func.isRequired,
+        push: PropTypes.func.isRequired,
     }),
 };
 

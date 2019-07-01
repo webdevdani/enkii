@@ -9,3 +9,4 @@ export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const PASSWORD_CHANGE = '/pw-change';
+export const PAGE_NOT_FOUND = '/404';

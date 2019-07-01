@@ -27,6 +27,7 @@ const Router = () => (
             <Route path={ROUTES.ACCOUNT} component={Account} />
             <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChange} />
             <Route path={ROUTES.ADMIN} component={Admin} />
+            <Route path={ROUTES.PAGE_NOT_FOUND} component={PageNotFound} />
             <Route component={PageNotFound} />
         </Switch>
     </BrowserRouter>

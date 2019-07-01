@@ -25,13 +25,17 @@ const ListEditorProvider = (props) => {
         if (props.id) {
             firebase.getList(props.id)
                 .then((list) => {
-                    dispatch({
-                        type: SET_LIST,
-                        value: {
-                            ...list.data(),
-                            id: list.id,
-                        },
-                    });
+                    if (list.exists) {
+                        dispatch({
+                            type: SET_LIST,
+                            value: {
+                                ...list.data(),
+                                id: list.id,
+                            },
+                        });
+                    } else {
+                        props.onListNotExisting();
+                    }
                 })
                 .catch((err) => {
                     err && err.message && showGrowlMessage(err.message);
@@ -66,6 +70,7 @@ ListEditorProvider.propTypes = {
     children: PropTypes.node.isRequired,
     id: PropTypes.string,
     onCreateNewList: PropTypes.func,
+    onListNotExisting: PropTypes.func.isRequired,
 };
 
 ListEditorProvider.defaultProps = {
