@@ -16,15 +16,13 @@ const EditList = (props) => {
         >
             <LeftSidebar
                 sidebarContent={<p>hi</p>}
+                noMaxWidth
             >
                     <ListEditor />
             </LeftSidebar>
         </ListEditorProvider>
     );
 }
-
-// get list id from URL
-// if making new list, replace path to have new id (history.replace)
 
 EditList.propTypes = {
     match: PropTypes.shape({

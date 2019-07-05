@@ -1,5 +1,6 @@
 import {
     UPDATE_LIST,
+    UPDATE_LIST_TITLE,
     ADD_LIST_ITEM,
     DELETE_LIST_ITEM,
     UPDATE_LIST_ITEM,
@@ -9,6 +10,13 @@ export const updateList = (dispatch, listInfo = {}) => {
     dispatch({
         type: UPDATE_LIST,
         value: listInfo,
+    });
+};
+
+export const updateListTitle = (dispatch, title = '') => {
+    dispatch({
+        type: UPDATE_LIST_TITLE,
+        value: title,
     });
 };
 

@@ -1,5 +1,5 @@
  import { useContext } from 'react';
- import ListEditor from './context';
+ import ListEditor from './index';
 
  const useListEditor = () => useContext(ListEditor);
 

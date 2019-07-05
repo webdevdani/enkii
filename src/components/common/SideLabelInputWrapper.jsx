@@ -19,7 +19,6 @@ const LabelText = styled.span`
 const Label = styled.label`
     display: flex;
     flex-direction: row;
-    margin-bottom: 1.5rem;
 
     &:focus-within ${LabelText} {
         color: ${props => props.theme.darkBorderColor};

@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'components/common/Button';
-import { listPropType, LIST_ITEMS } from '../module/listSchema';
-import ListItemForm from './ListItemForm';
+import { listPropType, LIST_ITEMS } from 'constants/schemas/list';
+import ListItemSection from './ListItemSection';
 
 const ListItemsFormSection = (props) => {
     return (
         <section name="list items">
             {props.listItems && props.listItems.map(listItem => (
-                <ListItemForm
+                <ListItemSection
                     onChange={(info) => props.onChange(listItem.order, info)}
                     key={listItem.order}
                     {...listItem}

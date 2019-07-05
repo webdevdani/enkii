@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import { useFirebase } from 'modules/Firebase';
 import { useAuthUser } from 'modules/AuthUser';
 import { useGrowlSystem } from 'components/compounds/GrowlSystem';
-import ListEditorContext from '../context';
+import ListEditorContext from './index';
 import listReducer, { SET_LIST } from '../module/listReducer';
+import listSchema from 'constants/schemas/list';
+
+const isTesting = true;
 
 const ListEditorProvider = (props) => {
     const [list, dispatch] = useReducer(listReducer);
@@ -20,7 +23,19 @@ const ListEditorProvider = (props) => {
             return;
         }
 
-        // need to handle list not existing!!!
+        if (isTesting) {
+            const newList = {
+                ...listSchema,
+                id: props.id || 'test',
+            };
+
+            dispatch({
+                type: SET_LIST,
+                value: newList,
+            });
+
+            return;
+        }
 
         if (props.id) {
             firebase.getList(props.id)

@@ -35,10 +35,9 @@ const ListSettingsFormSection = (props) => {
                 hideLabel
                 grow
             />
-            <ImageUploadButton
-                name={`list cover image`}
-                label="Cover Image"
-            />
+            <ImageUploadButton name="cover image">
+                Add Image
+            </ImageUploadButton>
             <UnderlineInput
                 label="Description"
                 name={`list ${DESCRIPTION}`}

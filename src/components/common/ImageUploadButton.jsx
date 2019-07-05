@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
-import SideLabelInputWrapper from 'components/common/SideLabelInputWrapper';
-
 const UploadButton = styled.button`
     border: 2px dashed #ccc;
+    border-radius: 18px 0;
+    min-height: 10rem;
     background-color: #f1f1f1;
     width: 100%;
     padding: ${props => props.theme.paddingS};
     color: ${props => props.theme.darkBorderColor};
     outline: none;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
 
     &:focus {
         border-color: ${props => props.theme.darkBorderColor};
@@ -19,20 +21,19 @@ const UploadButton = styled.button`
 
 const ImageUploadButton = (props) => {
     return (
-        <SideLabelInputWrapper label={props.label}>
-            <UploadButton>{props.buttonText}</UploadButton>
-        </SideLabelInputWrapper>
+        <UploadButton type="button">
+            {props.children}
+        </UploadButton>
     );
-}
+};
 
 ImageUploadButton.propTypes = {
-    label: PropTypes.string,
-    buttonText: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    onImageUpload: PropTypes.func,
 };
 
 ImageUploadButton.defaultProps = {
-    label: 'Image',
-    buttonText: 'Add Image',
+    onImageUpload: () => {},
 };
 
 export default ImageUploadButton;

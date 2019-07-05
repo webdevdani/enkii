@@ -16,7 +16,7 @@ const StyledInput = styled.input`
     width: 100%;
 `;
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
     ${props => inputContainerStyles(props)}
     ${props => props.hidden ? visuallyHiddenStyles(props) : ''}
 `;

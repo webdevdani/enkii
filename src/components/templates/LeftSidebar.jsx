@@ -13,16 +13,18 @@ const Wrapper = styled.div`
 
 const MainContentWrapper = styled.main`
     width: 100%;
-    max-width: 30rem;
     margin: auto;
-    padding: ${props => props.theme.paddingM};
     min-height: 100vh;
+    ${props => !props.noMaxWidth ? `
+        max-width: 30rem;
+        padding: ${props.theme.paddingM};
+    ` : ``}
 `;
 
-const LeftSidebar = ({ children, sidebarContent }) => (
+const LeftSidebar = ({ children, sidebarContent, noMaxWidth }) => (
     <Wrapper>
         <Sidebar sidebarContent={sidebarContent}/>
-        <MainContentWrapper>
+        <MainContentWrapper noMaxWidth={noMaxWidth}>
             {children}
         </MainContentWrapper>
     </Wrapper>
@@ -31,10 +33,12 @@ const LeftSidebar = ({ children, sidebarContent }) => (
 LeftSidebar.propTypes = {
     children: PropTypes.node.isRequired,
     sidebarContent: PropTypes.element,
+    noMaxWidth: PropTypes.bool,
 };
 
 LeftSidebar.defaultProps = {
     sidebarContent: null,
+    noMaxWidth: false,
 };
 
 export default LeftSidebar;

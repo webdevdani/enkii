@@ -1,5 +1,5 @@
 import ListEditor from './ListEditor';
-import ListEditorProvider from './components/ListEditorProvider';
+import ListEditorProvider from './context/ListEditorProvider';
 
 export { ListEditorProvider };
 

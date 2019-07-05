@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import Loader from 'components/common/Loader';
 import ListEditorForm from './components/ListEditorForm';
-import useListEditor from './useListEditor';
+import useListEditor from './context/useListEditor';
 
 const ListEditor = (props) => {
     const { list } = useListEditor();
 
     return list ?
-        <ListEditorForm {...list} /> :
+        <ListEditorForm /> :
         <Loader />;
 }
 

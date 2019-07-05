@@ -1,11 +1,12 @@
-import listSchema, * as LIST from './listSchema';
-import listItemSchema, * as LIST_ITEM  from './listItemSchema';
+import listSchema, * as LIST from 'constants/schemas/list';
+import listItemSchema, * as LIST_ITEM  from 'constants/schemas/listItem';
 import removeListItem from './utils/removeListItem';
 import updateListItem from './utils/updateListItem';
 
 export const CREATE_NEW_LIST = 'createList';
 export const SET_LIST = 'setList';
 export const UPDATE_LIST = 'updateList';
+export const UPDATE_LIST_TITLE = 'updateListTitle';
 export const ADD_LIST_ITEM = 'addItem';
 export const DELETE_LIST_ITEM = 'deleteItem';
 export const UPDATE_LIST_ITEM = 'updateItem';
@@ -20,6 +21,11 @@ const listReducer = (state = null, action) => {
             return {
                 ...state,
                 ...action.value,
+            };
+        case UPDATE_LIST_TITLE:
+            return {
+                ...state,
+                title: action.value,
             };
         case ADD_LIST_ITEM:
             return {
