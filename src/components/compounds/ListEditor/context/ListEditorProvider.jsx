@@ -7,6 +7,7 @@ import { useGrowlSystem } from 'components/compounds/GrowlSystem';
 import ListEditorContext from './index';
 import listReducer, { SET_LIST } from '../module/listReducer';
 import listSchema from 'constants/schemas/list';
+import listItemSchema from 'constants/schemas/listItem';
 
 const isTesting = true;
 
@@ -26,6 +27,16 @@ const ListEditorProvider = (props) => {
         if (isTesting) {
             const newList = {
                 ...listSchema,
+                listItems: [
+                    {
+                        ...listItemSchema,
+                        order: 1,
+                    },
+                    {
+                        ...listItemSchema,
+                        order: 2,
+                    },
+                ],
                 id: props.id || 'test',
             };
 

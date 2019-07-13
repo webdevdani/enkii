@@ -1,6 +1,7 @@
 import listSchema, * as LIST from 'constants/schemas/list';
 import listItemSchema, * as LIST_ITEM  from 'constants/schemas/listItem';
 import removeListItem from './utils/removeListItem';
+import addListItem from './utils/addListItem';
 import updateListItem from './utils/updateListItem';
 
 export const CREATE_NEW_LIST = 'createList';
@@ -28,16 +29,7 @@ const listReducer = (state = null, action) => {
                 title: action.value,
             };
         case ADD_LIST_ITEM:
-            return {
-                ...state,
-                [LIST.LIST_ITEMS]: [
-                    ...state[LIST.LIST_ITEMS],
-                    {
-                        ...listItemSchema,
-                        [LIST_ITEM.ORDER]: state[LIST.LIST_ITEMS].length + 1,
-                    },
-                ],
-            };
+            return addListItem(state, action.order);
         case DELETE_LIST_ITEM:
             // handling the last list item?
             return removeListItem(state, action.order);

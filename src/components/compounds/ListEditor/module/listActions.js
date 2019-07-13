@@ -20,9 +20,10 @@ export const updateListTitle = (dispatch, title = '') => {
     });
 };
 
-export const addListItem = (dispatch) => {
+export const addListItem = (dispatch, itemOrder) => {
     dispatch({
         type: ADD_LIST_ITEM,
+        order: itemOrder,
     });
 };
 
