@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components/macro';
 
 import useListEditor from '../../context/useListEditor';
 import {
@@ -8,6 +9,12 @@ import {
     deleteListItem,
 } from '../../module/listActions';
 import ListItemRow from './ListItemRow';
+
+const Sidebar = styled.aside`
+    overflow: scroll;
+    width: 25vw;
+    min-width: 250px;
+`;
 
 const ListItemForm = (props) => {
     const { list, dispatch } = useListEditor();
@@ -19,7 +26,7 @@ const ListItemForm = (props) => {
     };
 
     return (
-        <section>
+        <Sidebar>
             {!!listItems.length && listItems.map(item => (
                 <ListItemRow
                     id={item.order}
@@ -31,7 +38,7 @@ const ListItemForm = (props) => {
                     {...item}
                 />
             ))}
-        </section>
+        </Sidebar>
     );
 }
 

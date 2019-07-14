@@ -15,7 +15,7 @@ import listSchema, {
     TYPE,
     TYPE_OL,
     TYPE_UL,
-} from '../module/listSchema';
+} from 'constants/schemas/list';
 
 const FormSection = styled.section`
     padding-bottom: ${props => props.theme.paddingL};

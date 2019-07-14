@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import * as KeyCode from 'keycode-js';
+import TextareaAutosize from 'react-autosize-textarea';
 
 import baseInputStyles from 'styles/mixins/baseInputStyles';
 import headlineStyles from 'styles/mixins/headlineStyles';
@@ -21,19 +22,20 @@ const ListItemLabel = styled.label`
     display: flex;
 `;
 const ListItemLabelText = styled.span`
-    ${props => headlineStyles(props)}
+    ${props => headlineStyles({ size: 'small' })}
     margin-bottom: 0;
-    margin-top: ${props => props.theme.paddingXs};
+    margin-top: 0.66rem;
     margin-right: ${props => props.theme.paddingXs};
 `;
-const ListItemInput = styled.input`
+const ListItemInput = styled(TextareaAutosize)`
     ${props => baseInputStyles(props)}
     border: none;
+    resize: none;
 `;
 
 const ListItemRow = (props) => {
     const handleTitleChange = (e) => {
-        props.onChange(props.order, { title: e.target.value.trim() });
+        props.onChange(props.order, { title: e.target.value });
     };
 
     const handleKeyDown = (e) => {
@@ -41,7 +43,7 @@ const ListItemRow = (props) => {
 
         if (keyCode === KeyCode.KEY_ENTER || keyCode === KeyCode.KEY_RETURN) {
             const newListItemOrder = props.order + 1;
-            props.addNewListItem(newListItemOrder);
+            props.addNewListItem(newListItemOrder); // does this need to be a promise for focus to work?
             focusListItemTitleInput(newListItemOrder);
 
             e.preventDefault();

@@ -34,6 +34,7 @@ const TitleTopbar = (props) => {
                     style={{ fontWeight: 'bold' }}
                     placeholder="List Title"
                     hideLabel
+                    noMargin
                 />
             </TitleWrapper>
             <div>

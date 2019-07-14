@@ -13,7 +13,7 @@ import listItemSchema, {
     IMAGE_URL,
     DESCRIPTION,
     ORDER,
-} from '../module/listItemSchema';
+} from 'constants/schemas/listItem';
 
 const FormSection = styled.section`
     padding-bottom: ${props => props.theme.paddingL};
