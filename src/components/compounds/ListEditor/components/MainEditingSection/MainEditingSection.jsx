@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
+import FadeIn from 'components/common/FadeIn';
 import useListEditor from '../../context/useListEditor';
 import {
     updateList,
@@ -21,28 +22,28 @@ const Section = styled.section`
 const MainEditingSection = ({ activeListItem }) => {
     const { list, dispatch } = useListEditor();
     const { listItems } = list;
-    const [activeItemInfo, setActiveItemInfo] = useState(null);
-
-    useEffect(() => {
-        if (activeListItem) {
-            setActiveItemInfo(getListItemByOrder(activeListItem));
-        } else {
-            setActiveItemInfo(null);
-        }
-    }, [activeListItem]);
+    const activeListItemInfo = getListItemByOrder(listItems, activeListItem);
 
     return (
         <Section>
-            {activeItemInfo ? (
-                    <ListItemDetailsForm
-                        {...activeItemInfo}
-                        onChange={(info) => updateListItem(dispatch, activeItemInfo.order, info)}
-                    />
+            {activeListItemInfo ? (
+                    <FadeIn>
+                        <ListItemDetailsForm
+                            {...activeListItemInfo}
+                            onChange={info => updateListItem(
+                                dispatch,
+                                activeListItemInfo.order,
+                                info,
+                            )}
+                        />
+                    </FadeIn>
                 ) : (
-                    <ListDetailsForm
-                        {...list}
-                        onChange={(info) => updateList(dispatch, info)}
-                    />
+                    <FadeIn>
+                        <ListDetailsForm
+                            {...list}
+                            onChange={(info) => updateList(dispatch, info)}
+                        />
+                    </FadeIn>
                 )
             }
         </Section>

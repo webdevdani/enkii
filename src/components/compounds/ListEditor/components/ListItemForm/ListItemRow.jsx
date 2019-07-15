@@ -79,6 +79,8 @@ const ListItemRow = (props) => {
                     onChange={handleTitleChange}
                     placeholder="List Item Title"
                     onKeyDown={handleKeyDown}
+                    onFocus={() => props.selectListItem()}
+                    autoComplete="off"
                 />
             </ListItemLabel>
         </RowContainer>
@@ -92,6 +94,7 @@ ListItemRow.propTypes = {
     onChange: PropTypes.func.isRequired,
     addNewListItem: PropTypes.func.isRequired,
     removeListItem: PropTypes.func.isRequired,
+    selectListItem: PropTypes.func.isRequired,
 };
 
 export default ListItemRow;

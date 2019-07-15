@@ -37,10 +37,17 @@ const ListEditorForm = () => {
                 console.log(list);
             }}
         >
-            <TitleTopbar />
+            <TitleTopbar
+                setActiveListItem={setActiveListItem}
+            />
             <EditorLayout>
-                <ListItemForm />
-                <MainEditingSection activeListItem={activeListItem} />
+                <ListItemForm
+                    setActiveListItem={setActiveListItem}
+                />
+                <MainEditingSection
+                    activeListItem={activeListItem}
+                    setActiveListItem={setActiveListItem}
+                />
             </EditorLayout>
         </EditorForm>
     );

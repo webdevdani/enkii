@@ -11,7 +11,7 @@ export default function getListItemByOrder(listItems, order) {
     for (let i = 0; i < listItemCount; i++) {
         const item = listItems[i];
 
-        if (item.order !== order) {
+        if (item.order === order) {
             selectedListItem = item;
             break;
         }

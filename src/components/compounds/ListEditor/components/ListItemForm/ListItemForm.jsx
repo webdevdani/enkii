@@ -35,6 +35,7 @@ const ListItemForm = (props) => {
                     onChange={handleListItemChange}
                     addNewListItem={handleAddListItem}
                     removeListItem={handleRemoveListItem}
+                    selectListItem={() => props.setActiveListItem(item.order)}
                     {...item}
                 />
             ))}
@@ -43,7 +44,7 @@ const ListItemForm = (props) => {
 }
 
 ListItemForm.propTypes = {
-
+    setActiveListItem: PropTypes.func.isRequired,
 };
 
 ListItemForm.defaultProps = {

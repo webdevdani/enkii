@@ -31,8 +31,10 @@ const TitleTopbar = (props) => {
                     name={`list title`}
                     value={list.title}
                     onChange={handleTitleChange}
+                    onFocus={() => props.setActiveListItem(null)}
                     style={{ fontWeight: 'bold' }}
                     placeholder="List Title"
+                    autoComplete="off"
                     hideLabel
                     noMargin
                 />
@@ -45,11 +47,7 @@ const TitleTopbar = (props) => {
 }
 
 TitleTopbar.propTypes = {
-
-};
-
-TitleTopbar.defaultProps = {
-
+    setActiveListItem: PropTypes.func.isRequired,
 };
 
 export default TitleTopbar;

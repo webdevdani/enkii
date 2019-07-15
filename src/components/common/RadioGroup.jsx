@@ -8,7 +8,6 @@ const RadioOptionGroup = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
 `;
 
@@ -16,6 +15,7 @@ const RadioWrapper = styled.div`
     padding-top: ${props => props.theme.paddingS};
     color: ${props => props.theme.subTextColor};
     font-size: 0.75rem;
+    margin-right: ${props => props.theme.paddingM};
 `;
 
 const RadioGroup = (props) => (
