@@ -6,6 +6,7 @@ import { SIGN_IN, EDIT_LIST, PAGE_NOT_FOUND } from 'constants/routes';
 import withAuthorization from 'modules/Authorization';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import ListEditor, { ListEditorProvider } from 'components/compounds/ListEditor';
+import HomeButton from './HomeButton';
 
 const EditList = (props) => {
     return (
@@ -15,7 +16,7 @@ const EditList = (props) => {
             onListNotExisting={() => props.history.push(PAGE_NOT_FOUND)}
         >
             <LeftSidebar
-                sidebarContent={<p>hi</p>}
+                sidebarContent={<HomeButton />}
                 noMaxWidth
             >
                     <ListEditor />
