@@ -27,7 +27,7 @@ const MainEditingSection = ({ activeListItem }) => {
     return (
         <Section>
             {activeListItemInfo ? (
-                    <FadeIn>
+                    <FadeIn key={activeListItemInfo.order}>
                         <ListItemDetailsForm
                             {...activeListItemInfo}
                             onChange={info => updateListItem(
@@ -38,7 +38,7 @@ const MainEditingSection = ({ activeListItem }) => {
                         />
                     </FadeIn>
                 ) : (
-                    <FadeIn>
+                    <FadeIn key="list">
                         <ListDetailsForm
                             {...list}
                             onChange={(info) => updateList(dispatch, info)}
