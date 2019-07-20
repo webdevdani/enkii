@@ -26,7 +26,7 @@ const EditorForm = styled.form`
 `;
 
 const ListEditorForm = () => {
-    const { dispatch, list } = useListEditor();
+    const { dispatch, list, saveList } = useListEditor();
     const { listItems, ...listProps } = list;
     const [activeListItem, setActiveListItem] = useState(null);
 
@@ -35,6 +35,7 @@ const ListEditorForm = () => {
             onSubmit={(e) => {
                 e.preventDefault();
                 console.log(list);
+                saveList();
             }}
         >
             <TitleTopbar

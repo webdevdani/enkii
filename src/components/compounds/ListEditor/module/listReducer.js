@@ -1,5 +1,5 @@
-import listSchema, * as LIST from 'constants/schemas/list';
-import listItemSchema, * as LIST_ITEM  from 'constants/schemas/listItem';
+import listSchema from 'constants/schemas/list';
+import listItemSchema  from 'constants/schemas/listItem';
 import removeListItem from './utils/removeListItem';
 import addListItem from './utils/addListItem';
 import updateListItem from './utils/updateListItem';
@@ -11,32 +11,85 @@ export const UPDATE_LIST_TITLE = 'updateListTitle';
 export const ADD_LIST_ITEM = 'addItem';
 export const DELETE_LIST_ITEM = 'deleteItem';
 export const UPDATE_LIST_ITEM = 'updateItem';
+export const SET_IS_DIRTY = 'setIsDirty';
 
-const listReducer = (state = null, action) => {
+// State Keys
+export const IS_DIRTY = 'isDirty';
+export const LIST = 'list';
+export const LIST_ITEMS = 'listItems';
+
+export const defaultState = {
+    [IS_DIRTY]: false,
+    [LIST]: null,
+};
+
+const listReducer = (state, action) => {
     switch (action.type) {
         case SET_LIST:
-            return action.value;
+            return {
+                ...state,
+                [LIST]: action.value,
+            };
         case CREATE_NEW_LIST:
-            return { ...listSchema };
+            return {
+                ...state,
+                [LIST]: { ...listSchema },
+            };
         case UPDATE_LIST:
             return {
                 ...state,
-                ...action.value,
+                [LIST]: action.value,
+                [IS_DIRTY]: true,
             };
         case UPDATE_LIST_TITLE:
             return {
                 ...state,
-                title: action.value,
+                [LIST]: {
+                    ...state[LIST],
+                    title: action.value,
+                },
+                [IS_DIRTY]: true,
             };
         case ADD_LIST_ITEM:
-            return addListItem(state, action.order);
+            return {
+                ...state,
+                [LIST]: {
+                    ...state[LIST],
+                    [LIST_ITEMS]: addListItem(state[LIST][LIST_ITEMS], action.order),
+                },
+                [IS_DIRTY]: true,
+            };
         case DELETE_LIST_ITEM:
             // handling the last list item?
-            return removeListItem(state, action.order);
+            return {
+                ...state,
+                [LIST]: {
+                    ...state[LIST],
+                    [LIST_ITEMS]: removeListItem(state[LIST][LIST_ITEMS], action.order),
+                },
+                [IS_DIRTY]: true,
+            };
         case UPDATE_LIST_ITEM:
-            return updateListItem(state, action.order, action.value);
+            return {
+                ...state,
+                [LIST]: {
+                    ...state[LIST],
+                    [LIST_ITEMS]: updateListItem(
+                        state[LIST][LIST_ITEMS],
+                        action.order,
+                        action.value,
+                    ),
+                },
+                [IS_DIRTY]: true,
+            };
+        case SET_IS_DIRTY:
+            return {
+                ...state,
+                [IS_DIRTY]: action.value,
+            };
         default:
-            throw new Error('No valid action passed');
+            // throw new Error('No valid action passed');
+            return state;
     }
 };
 

@@ -65,21 +65,14 @@ class Firebase {
     };
 
     saveList = (listId, data) => {
-
+        const listCollection = this.db.collection(LISTS);
+        return listCollection.doc(listId).set(data);
     };
 
     deleteList = (listId) => {
         // remove list from user
         // remove list
         // remove listItem
-    };
-
-    createNewListItem = (listId, order) => {
-
-    };
-
-    updateListItems = (listItemsId, data) => {
-
     };
 
 

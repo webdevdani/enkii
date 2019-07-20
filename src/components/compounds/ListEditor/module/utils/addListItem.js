@@ -3,12 +3,11 @@ import listItemSchema from 'constants/schemas/listItem';
 /**
  * Accepts a list, and returns it with the list item
  * added, and the other items re-ordered
- * @param  {object} list Object following the list schema
+ * @param  {listItems} listItems
  * @param  {number} addItemAtOrder  list item's order number
- * @return {object} list
+ * @return {object} listItems
  */
-export default function addListItem(list, addItemAtOrder) {
-    const { listItems } = list;
+export default function addListItem(listItems, addItemAtOrder) {
     const listItemCount = listItems.length;
     const newListItems = [];
     let orderCounter = 1;
@@ -42,19 +41,5 @@ export default function addListItem(list, addItemAtOrder) {
         });
     }
 
-    return {
-        ...list,
-        listItems: newListItems,
-    };
+    return newListItems;
 }
-
-// return {
-//     ...state,
-//     [LIST.LIST_ITEMS]: [
-//         ...state[LIST.LIST_ITEMS],
-//         {
-//             ...listItemSchema,
-//             [LIST_ITEM.ORDER]: state[LIST.LIST_ITEMS].length + 1,
-//         },
-//     ],
-// };
