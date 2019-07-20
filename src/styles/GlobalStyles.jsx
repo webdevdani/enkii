@@ -68,6 +68,10 @@ const GlobalStyles = createGlobalStyle`
     input {
         box-sizing: border-box;
     }
+
+    svg {
+      fill: currentColor;
+    }
 `;
 
 export default GlobalStyles;

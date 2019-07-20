@@ -1,5 +1,10 @@
-import app from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
+
+import { OWNER } from 'constants/roles';
+import listSchema, { LIST_ITEMS } from 'constants/schemas/list';
+import listItemSchema, { ORDER } from 'constants/schemas/listItem';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,11 +15,16 @@ const config = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
 };
 
+// Database Keys
+const USERS = 'users';
+const LISTS = 'lists';
+
 class Firebase {
     constructor() {
-        app.initializeApp(config);
+        firebase.initializeApp(config);
 
-        this.auth = app.auth();
+        this.auth = firebase.auth();
+        this.db = firebase.firestore();
     }
 
     /* *** Auth API *** */
@@ -34,6 +44,59 @@ class Firebase {
     doPasswordUpdate = password => (
         this.auth.currentUser.updatePassword(password)
     );
+
+    getAuthedUserId = () => this.auth.currentUser ? this.auth.currentUser.uid : null;
+
+
+    /* *** Writing data *** */
+
+    createNewList = (userId) => {
+        return this.db.collection(LISTS).add({
+            ...listSchema,
+            user: userId || this.getAuthedUserId(),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            [LIST_ITEMS]: [{
+                ...listItemSchema,
+                [ORDER]: 1,
+            }],
+        }).then(listRef => listRef.get());
+        // need to associate the list to the user?
+        // or get collection where userId = authed user?
+    };
+
+    saveList = (listId, data) => {
+
+    };
+
+    deleteList = (listId) => {
+        // remove list from user
+        // remove list
+        // remove listItem
+    };
+
+    createNewListItem = (listId, order) => {
+
+    };
+
+    updateListItems = (listItemsId, data) => {
+
+    };
+
+
+    /* *** Reading data *** */
+
+    getList = (listId) => {
+        return this.db.collection(LISTS).doc(listId).get();
+    };
+
+    getUsersLists = (userId) => {
+        // get users/lists
+        // then get lists for each id
+    };
+
+    getPublicLists = () => {
+        // get lists, paginated
+    }
 }
 
 // When ready to deploy, create prod version of firebase project

@@ -7,13 +7,26 @@ import { ACCOUNT } from 'constants/routes';
 import { useAuthUser } from 'modules/AuthUser';
 import UserAvatar, { SIZE_SMALL } from 'components/common/UserAvatar';
 
+const sharedSidebarStyles = `
+    width: 100px;
+    min-width: 100px;
+    height: 100vh;
+`;
+
 const SidebarWrapper = styled.aside`
     padding: ${props => `${props.theme.paddingM} ${props.theme.paddingXs}`};
-    width: 100px;
     background-color: ${props => props.theme.borderColor};
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    ${sharedSidebarStyles}
+`;
+
+const SidebarSpaceHolder = styled.div`
+    ${sharedSidebarStyles}
 `;
 
 const AvatarWrapper = styled.div`
@@ -31,15 +44,17 @@ const Sidebar = (props) => {
     const user = useAuthUser();
 
     return (
-        <SidebarWrapper>
-            {props.sidebarContent && props.sidebarContent}
-            <AvatarWrapper>
-                <Link to={ACCOUNT}>
-                    <UserAvatar photoUrl={user.photoURL} size={SIZE_SMALL} />
-                    <p>Account</p>
-                </Link>
-            </AvatarWrapper>
-        </SidebarWrapper>
+        <SidebarSpaceHolder>
+            <SidebarWrapper>
+                {props.sidebarContent && props.sidebarContent}
+                <AvatarWrapper>
+                    <Link to={ACCOUNT}>
+                        <UserAvatar photoUrl={user.photoURL} size={SIZE_SMALL} />
+                        <p>Account</p>
+                    </Link>
+                </AvatarWrapper>
+            </SidebarWrapper>
+        </SidebarSpaceHolder>
     );
 }
 

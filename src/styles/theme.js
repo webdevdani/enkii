@@ -1,4 +1,5 @@
 const borderColor = '#EEE';
+const darkBorderColor = '#939393';
 
 export default {
     rootFontSize: '22px',
@@ -11,6 +12,8 @@ export default {
     borderRadius: '4px',
     baseLineHeight: '1.4',
     borderColor,
+    darkBorderColor,
+    iconColor: darkBorderColor,
     baseBorder: `1px solid ${borderColor}`,
     baseBoxShadow: '0px 3px 15px -1px rgba(0,0,0,0.67)',
 
@@ -19,4 +22,7 @@ export default {
     paddingS: '0.5rem',
     paddingM: '1rem',
     paddingL: '2rem',
+
+    // Transitions
+    shortTransitionDuration: '300ms',
 };
