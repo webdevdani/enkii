@@ -5,14 +5,14 @@ import { APP } from 'constants/routes';
 import IconButton from 'components/common/IconButton';
 import HomeIcon from 'styles/icons/Home';
 
-const HomeButton = (props) => {
-    return (
-        <Link to={APP}>
-            <IconButton>
-                <HomeIcon />
-            </IconButton>
-        </Link>
-    );
-}
+const BTN_LABEL = 'Go back to your dashboard';
+
+const HomeButton = () => (
+    <Link to={APP}>
+        <IconButton label={BTN_LABEL}>
+            <HomeIcon title={BTN_LABEL} />
+        </IconButton>
+    </Link>
+);
 
 export default HomeButton;
