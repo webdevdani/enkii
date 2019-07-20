@@ -16,6 +16,10 @@ import gappedGroupStyles from 'styles/mixins/gappedGroup';
 
 const Modal = styled.div`
     ${props => modalStyles(props)}
+    max-width: 500px;
+    width: 95%;
+    min-width: 0;
+    margin: auto;
 `;
 const ModalHeader = styled.header`
     ${props => modalHeaderStyles(props)}
@@ -43,9 +47,13 @@ const WarningDialog = (props) => (
                 <p>{props.message}</p>
             </ModalContent>
             <ModalFooter>
-                <Button onClick={props.onRequestClose}>
-                    {props.closeButtonText}
-                </Button>
+                {props.actions ?
+                    props.actions : (
+                        <Button onClick={props.onRequestClose}>
+                            {props.closeButtonText}
+                        </Button>
+                    )
+                }
             </ModalFooter>
         </Modal>
     </AriaModal>
@@ -56,11 +64,13 @@ WarningDialog.propTypes = {
     message: PropTypes.string.isRequired,
     headline: PropTypes.string,
     closeButtonText: PropTypes.string,
+    actions: PropTypes.node,
 };
 
 WarningDialog.defaultProps = {
     headline: 'Alert!',
     closeButtonText: 'Close Alert',
+    actions: null,
 };
 
 export default WarningDialog;
