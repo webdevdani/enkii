@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import * as KeyCode from 'keycode-js';
 import TextareaAutosize from 'react-autosize-textarea';
 
+import { listPropType, TYPE, TYPE_OL, TYPE_UL } from 'constants/schemas/list';
 import baseInputStyles from 'styles/mixins/baseInputStyles';
 import headlineStyles from 'styles/mixins/headlineStyles';
 
@@ -72,7 +73,9 @@ const ListItemRow = (props) => {
     return (
         <RowContainer>
             <ListItemLabel>
-                <ListItemLabelText>{props.label}.</ListItemLabelText>
+                <ListItemLabelText>
+                    {props.listType === TYPE_OL ? `${props.order}.` : '•'}
+                </ListItemLabelText>
                 <ListItemInput
                     id={getItemInputId(props.order)}
                     value={props.title}
@@ -89,12 +92,12 @@ const ListItemRow = (props) => {
 
 ListItemRow.propTypes = {
     order: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     addNewListItem: PropTypes.func.isRequired,
     removeListItem: PropTypes.func.isRequired,
     selectListItem: PropTypes.func.isRequired,
+    listType: listPropType[TYPE],
 };
 
 export default ListItemRow;

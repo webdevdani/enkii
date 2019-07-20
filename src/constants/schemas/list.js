@@ -12,8 +12,8 @@ export const CREATED_AT = 'createdAt';
 export const MODIFIED_AT = 'modifiedAt';
 export const PRIVACY = 'privacy';
 
-export const TYPE_OL = 'ordered';
-export const TYPE_UL = 'unordered';
+export const TYPE_OL = 'ol';
+export const TYPE_UL = 'ul';
 
 export const listPropType = {
     [TITLE]: PropTypes.string,

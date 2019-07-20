@@ -38,7 +38,10 @@ const listReducer = (state, action) => {
         case UPDATE_LIST:
             return {
                 ...state,
-                [LIST]: action.value,
+                [LIST]: {
+                    ...state[LIST],
+                    ...action.value
+                },
                 [IS_DIRTY]: true,
             };
         case UPDATE_LIST_TITLE:
