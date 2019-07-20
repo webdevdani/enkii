@@ -5,8 +5,7 @@
  * @param  {number} removeItemAtOrder  list item's order number
  * @return {object} list
  */
-export default function removeListItem(list, removeItemAtOrder) {
-    const { listItems } = list;
+export default function removeListItem(listItems, removeItemAtOrder) {
     const listItemCount = listItems.length;
     const newListItems = [];
     let orderCounter = 1;
@@ -24,8 +23,5 @@ export default function removeListItem(list, removeItemAtOrder) {
         }
     }
 
-    return {
-        ...list,
-        listItems: newListItems,
-    };
+    return newListItems;
 }

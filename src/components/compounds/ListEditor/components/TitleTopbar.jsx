@@ -20,7 +20,7 @@ const TitleWrapper = styled.div`
 `;
 
 const TitleTopbar = (props) => {
-    const { list, dispatch } = useListEditor();
+    const { list, dispatch, isDirty } = useListEditor();
     const handleTitleChange = (e) => updateListTitle(dispatch, e.target.value);
 
     return (
@@ -40,7 +40,7 @@ const TitleTopbar = (props) => {
                 />
             </TitleWrapper>
             <div>
-                <Button type="submit">Save</Button>
+                <Button disabled={!isDirty} type="submit">Save</Button>
             </div>
         </Header>
     );

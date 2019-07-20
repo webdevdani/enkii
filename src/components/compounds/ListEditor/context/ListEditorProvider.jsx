@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 import { useFirebase } from 'modules/Firebase';
 import { useAuthUser } from 'modules/AuthUser';
 import { useGrowlSystem } from 'components/compounds/GrowlSystem';
-import ListEditorContext from './index';
-import listReducer, { SET_LIST } from '../module/listReducer';
 import listSchema from 'constants/schemas/list';
 import listItemSchema from 'constants/schemas/listItem';
+import ListEditorContext from './index';
+import listReducer, { SET_LIST, SET_IS_DIRTY, defaultState } from '../module/listReducer';
 
-const isTesting = true;
+const isTesting = false;
 
 const ListEditorProvider = (props) => {
-    const [list, dispatch] = useReducer(listReducer);
+    const [state, dispatch] = useReducer(listReducer, defaultState);
     const showGrowlMessage = useGrowlSystem();
     const firebase = useFirebase();
     const authUser = useAuthUser();
+    const { list, isDirty } = state;
 
     useEffect(() => {
         if (list) {
@@ -85,8 +86,26 @@ const ListEditorProvider = (props) => {
         }
     }, [props.id]);
 
+    const saveList = () => {
+        firebase.saveList(list.id, list)
+            .then(() => {
+                dispatch({
+                    type: SET_IS_DIRTY,
+                    value: false,
+                });
+            })
+            .catch((err) => {
+                err && err.message && showGrowlMessage(err.message);
+            });
+    };
+
     return (
-        <ListEditorContext.Provider value={{ list, dispatch }}>
+        <ListEditorContext.Provider value={{
+            list,
+            dispatch,
+            saveList,
+            isDirty,
+        }}>
             {props.children}
         </ListEditorContext.Provider>
     );

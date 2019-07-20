@@ -4,6 +4,7 @@ import {
     ADD_LIST_ITEM,
     DELETE_LIST_ITEM,
     UPDATE_LIST_ITEM,
+    SET_IS_DIRTY,
 } from './listReducer';
 
 export const updateList = (dispatch, listInfo = {}) => {

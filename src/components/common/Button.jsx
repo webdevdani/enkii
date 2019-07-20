@@ -9,6 +9,8 @@ const Button = styled.button`
     padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
     ${props => props.fullWidth ? `width: 100%;` : ''}
     line-height: 1;
+    opacity: ${props => props.disabled ? '0.6': '1'};
+    transition: opacity 0.3s ease-in-out;
 `;
 
 export default Button;

@@ -1,5 +1,4 @@
-export default function updateListItem(list, listItemOrder, listItemUpdate) {
-    const { listItems } = list;
+export default function updateListItem(listItems, listItemOrder, listItemUpdate) {
     const listItemCount = listItems.length;
     const newListItems = [];
 
@@ -16,10 +15,7 @@ export default function updateListItem(list, listItemOrder, listItemUpdate) {
         newListItems.push(item);
     }
 
-    return {
-        ...list,
-        listItems: newListItems,
-    };
+    return newListItems;
 }
 
 /* after getting id from firebase, normalize list? Be more performant to update
