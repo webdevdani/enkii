@@ -31,11 +31,11 @@ const ListItemForm = (props) => {
                 <ListItemRow
                     id={item.order}
                     key={item.order}
-                    label={item.order} // if ol vs url, change
                     onChange={handleListItemChange}
                     addNewListItem={handleAddListItem}
                     removeListItem={handleRemoveListItem}
                     selectListItem={() => props.setActiveListItem(item.order)}
+                    listType={list.type}
                     {...item}
                 />
             ))}
