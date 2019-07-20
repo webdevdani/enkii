@@ -28,11 +28,12 @@ const ImageUploadButton = (props) => {
 };
 
 ImageUploadButton.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     onImageUpload: PropTypes.func,
 };
 
 ImageUploadButton.defaultProps = {
+    children: 'Add Image',
     onImageUpload: () => {},
 };
 
