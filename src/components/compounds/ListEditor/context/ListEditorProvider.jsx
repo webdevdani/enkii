@@ -86,7 +86,7 @@ const ListEditorProvider = (props) => {
         }
     }, [props.id]);
 
-    const saveList = () => {
+    const saveList = () => (
         firebase.saveList(list.id, list)
             .then(() => {
                 dispatch({
@@ -96,8 +96,8 @@ const ListEditorProvider = (props) => {
             })
             .catch((err) => {
                 err && err.message && showGrowlMessage(err.message);
-            });
-    };
+            })
+    );
 
     return (
         <ListEditorContext.Provider value={{

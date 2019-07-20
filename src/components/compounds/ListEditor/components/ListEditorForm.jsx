@@ -12,6 +12,7 @@ import useListEditor from '../context/useListEditor';
 import TitleTopbar from './TitleTopbar';
 import ListItemForm from './ListItemForm';
 import MainEditingSection from './MainEditingSection';
+import UnsavedChangesDialog from './UnsavedChangesDialog';
 
 const EditorLayout = styled.div`
     display: flex;
@@ -26,7 +27,7 @@ const EditorForm = styled.form`
 `;
 
 const ListEditorForm = () => {
-    const { dispatch, list, saveList } = useListEditor();
+    const { dispatch, list, saveList, isDirty } = useListEditor();
     const { listItems, ...listProps } = list;
     const [activeListItem, setActiveListItem] = useState(null);
 
@@ -50,6 +51,7 @@ const ListEditorForm = () => {
                     setActiveListItem={setActiveListItem}
                 />
             </EditorLayout>
+            <UnsavedChangesDialog when={isDirty} saveList={saveList} />
         </EditorForm>
     );
 }
