@@ -82,7 +82,9 @@ class Firebase {
     /* *** Reading data *** */
 
     getList = (listId) => {
-        return this.db.collection(LISTS).doc(listId).get();
+        return this.db.collection(LISTS)
+            .doc(listId)
+            .get();
     };
 
     getUsersLists = (userId) => {

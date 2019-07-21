@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 
 import { useFirebase } from 'modules/Firebase';
 import { useAuthUser } from 'modules/AuthUser';
-import Headline, { SIZE_LARGE } from 'components/common/Headline';
-import Loader from 'components/common/Loader';
 
+import Loader from 'components/common/Loader';
 import ListCollectionView from './ListCollectionView';
 import DashboardEmptyState from './DashboardEmptyState';
 
@@ -41,14 +40,8 @@ const ListDashboard = (props) => {
     return (
         <React.Fragment>
             {lists.length ?
-                (
-                    <section>
-                        <Headline size={SIZE_LARGE}>Your Lists</Headline>
-                        <ListCollectionView lists={lists} />
-                    </section>
-                ) : (
-                    <DashboardEmptyState />
-                )
+                <ListCollectionView lists={lists} /> :
+                <DashboardEmptyState />
             }
         </React.Fragment>
     );
