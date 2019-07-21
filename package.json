@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cloudinary-react": "^1.1.1",
+    "eslint-config-react-app": "^4.0.1",
     "firebase": "^6.1.1",
     "keycode-js": "^1.0.4",
     "react": "^16.8.6",

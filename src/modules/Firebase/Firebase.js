@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 // import { OWNER } from 'constants/roles';
-import listSchema, { LIST_ITEMS } from 'constants/schemas/list';
+import listSchema, { LIST_ITEMS, USER_ID, CREATED_AT, MODIFIED_AT } from 'constants/schemas/list';
 import listItemSchema, { ORDER } from 'constants/schemas/listItem';
 
 const config = {
@@ -53,8 +53,8 @@ class Firebase {
     createNewList = (userId) => {
         return this.db.collection(LISTS).add({
             ...listSchema,
-            user: userId || this.getAuthedUserId(),
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            [USER_ID]: userId || this.getAuthedUserId(),
+            [CREATED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
             [LIST_ITEMS]: [{
                 ...listItemSchema,
                 [ORDER]: 1,
@@ -66,7 +66,10 @@ class Firebase {
 
     saveList = (listId, data) => {
         const listCollection = this.db.collection(LISTS);
-        return listCollection.doc(listId).set(data);
+        return listCollection.doc(listId).set({
+            ...data,
+            [MODIFIED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
+        });
     };
 
     deleteList = (listId) => {
@@ -83,8 +86,10 @@ class Firebase {
     };
 
     getUsersLists = (userId) => {
-        // get users/lists
-        // then get lists for each id
+        return this.db.collection(LISTS)
+            .where(USER_ID, '==', userId)
+            .orderBy(MODIFIED_AT, 'desc')
+            .get();
     };
 
     getPublicLists = () => {
