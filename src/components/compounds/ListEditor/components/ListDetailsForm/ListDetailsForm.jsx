@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
-import Headline from 'components/common/Headline';
 import UnderlineInput from 'components/common/UnderlineInput';
-import ImageUploadButton from 'components/common/ImageUploadButton';
 import RadioGroup from 'components/common/RadioGroup';
+import ImageEditor from '../ImageEditor';
 
 import listSchema, {
     listPropType,
@@ -35,9 +34,12 @@ const ListSettingsFormSection = (props) => {
                 hideLabel
                 grow
             />
-            <ImageUploadButton name="cover image">
-                Add Image
-            </ImageUploadButton>
+            <ImageEditor
+                src={props[IMAGE_URL]}
+                onChange={(img) => props.onChange({ [IMAGE_URL]: img })}
+                listId={props.id}
+                userId={props.user}
+            />
             <UnderlineInput
                 label="Description"
                 name={`list ${DESCRIPTION}`}
@@ -65,6 +67,8 @@ const ListSettingsFormSection = (props) => {
 }
 
 ListSettingsFormSection.propTypes = {
+    id: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
     [TITLE]: listPropType[TITLE],
     [IMAGE_URL]: listPropType[IMAGE_URL],
     [DESCRIPTION]: listPropType[DESCRIPTION],

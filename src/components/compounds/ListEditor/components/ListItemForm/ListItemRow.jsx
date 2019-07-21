@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 import * as KeyCode from 'keycode-js';
 import TextareaAutosize from 'react-autosize-textarea';
 
-import { listPropType, TYPE, TYPE_OL, TYPE_UL } from 'constants/schemas/list';
+import { listPropType, TYPE, TYPE_OL } from 'constants/schemas/list';
 import baseInputStyles from 'styles/mixins/baseInputStyles';
 import headlineStyles from 'styles/mixins/headlineStyles';
 
@@ -91,7 +91,7 @@ const ListItemRow = (props) => {
 }
 
 ListItemRow.propTypes = {
-    order: PropTypes.string.isRequired,
+    order: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     addNewListItem: PropTypes.func.isRequired,

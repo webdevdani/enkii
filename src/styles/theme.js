@@ -25,4 +25,6 @@ export default {
 
     // Transitions
     shortTransitionDuration: '300ms',
+
+    readingWidth: '600px',
 };

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import listItemSchema, { listItemPropType, ORDER } from './listItem';
+import { listItemPropType } from './listItem';
 
 export const TITLE = 'title';
 export const IMAGE_URL = 'imageUrl';

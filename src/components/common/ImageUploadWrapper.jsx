@@ -9,7 +9,7 @@ const CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
  * `result.info.url` will be the image URL we want.
  */
 
-const ImageUploadWrapper = ({ children, onUpload, uploadPreset }) => {
+const ImageUploadWrapper = ({ children, onUpload, uploadPreset, widgetProps }) => {
     const handleOpenWidget = () => {
         if (!widget && window.cloudinary) {
             widget = window.cloudinary.createUploadWidget({
@@ -19,6 +19,7 @@ const ImageUploadWrapper = ({ children, onUpload, uploadPreset }) => {
         }
 
         if (widget) {
+            widget.update(widgetProps);
             widget.open();
         } else {
             console.warn('Cloudinary is not initialized yet');

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import Headline from 'components/common/Headline';
 import UnderlineInput from 'components/common/UnderlineInput';
-import ImageUploadButton from 'components/common/ImageUploadButton';
+import ImageEditor from '../ImageEditor';
 
 import listItemSchema, {
     listItemPropType,
@@ -56,8 +56,12 @@ const ListItemForm = (props) => {
                     onChange={(e) => props.onChange({ [URL]: e.target.value })}
                     placeholder="(Optional)"
                 />
-                <ImageUploadButton
-                    name={`${listItemName} ${IMAGE_URL}`}
+                <ImageEditor
+                    src={props[IMAGE_URL]}
+                    onChange={(img) => props.onChange({ [IMAGE_URL]: img })}
+                    listId={props.listId}
+                    userId={props.user}
+                    listItemOrder={props[ORDER]}
                 />
                 <UnderlineInput
                     label="Description"
@@ -78,6 +82,8 @@ ListItemForm.propTypes = {
     [IMAGE_URL]: listItemPropType[IMAGE_URL],
     [DESCRIPTION]: listItemPropType[DESCRIPTION],
     onChange: PropTypes.func.isRequired,
+    listId: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
 };
 
 ListItemForm.defaultProps = {
