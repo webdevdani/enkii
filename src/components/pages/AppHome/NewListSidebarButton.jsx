@@ -18,8 +18,4 @@ const NewListSidebarButton = (props) => (
     </div>
 );
 
-NewListSidebarButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
-};
-
 export default NewListSidebarButton;

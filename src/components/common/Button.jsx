@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 const Button = styled.button`
-    font-size: 0.75rem;
+    font-size: ${props => props.size === 'small' ? '0.55rem' : '0.75rem'};
     font-weight: 600;
     background-color: ${props => props.secondary ? 'transparent' : props.theme.accentColor};
     border: 1px solid ${props => props.theme.accentColor};
