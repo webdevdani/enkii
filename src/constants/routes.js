@@ -5,6 +5,7 @@ export const SIGN_OUT = '/signout'
 export const APP = '/app';
 export const CREATE_LIST = '/app/list/new';
 export const EDIT_LIST = '/app/list/:id/edit';
+export const VIEW_LIST = '/l/:id';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';

@@ -8,7 +8,7 @@ import trimStringToLastWord from 'utils/trimStringToLastWord';
 import shortFormatDate from 'utils/shortFormatDate';
 import getPublicIdFromCloudinaryUrl from 'utils/getPublicIdFromCloudinaryUrl';
 import gappedGroupStyles from 'styles/mixins/gappedGroup';
-import { EDIT_LIST } from 'constants/routes';
+import { EDIT_LIST, VIEW_LIST } from 'constants/routes';
 
 import Headline, { SIZE_SMALL } from 'components/common/Headline';
 import Button from 'components/common/Button';
@@ -73,7 +73,9 @@ const ListCard = (props) => {
                 <DescriptionText>{trimmedDesc}</DescriptionText>
             }
             <ButtonGroup>
-                <Button size="small" secondary>View List</Button>
+                <Link to={generatePath(VIEW_LIST, { id: props.id })}>
+                    <Button size="small" secondary>View List</Button>
+                </Link>
                 <Link to={generatePath(EDIT_LIST, { id: props.id })}>
                     <Button size="small">Edit List</Button>
                 </Link>
