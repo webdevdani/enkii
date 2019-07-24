@@ -3,7 +3,7 @@ const darkBorderColor = '#939393';
 
 export default {
     rootFontSize: '22px',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: '"Avenir", Arial, sans-serif',
     fontColor: '#041839',
     subTextColor: '#868997',
     lightFontColor: '#FFFFFF',

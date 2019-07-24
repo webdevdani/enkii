@@ -65,6 +65,10 @@ const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    input, textarea, select, button {
+        font-family: inherit;
+    }
+
     input {
         box-sizing: border-box;
     }
