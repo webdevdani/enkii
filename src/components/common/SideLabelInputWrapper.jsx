@@ -5,13 +5,13 @@ import styled from 'styled-components/macro';
 import visuallyHiddenStyles from 'styles/mixins/visuallyHidden';
 
 const LabelText = styled.span`
-    min-width: 4.5rem;
     font-size: 0.75rem;
     padding-top: ${props => props.theme.paddingS};
     margin-right: 0.75rem;
     color: #cfcfcf;
     line-height: 1rem;
     transition: color ${props => props.theme.shortTransitionDuration};
+    white-space: nowrap;
 
     ${props => props.hideLabel ? visuallyHiddenStyles(props) : ''}
 `;

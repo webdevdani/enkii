@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { APP } from 'constants/routes';
 import IconButton from 'components/common/IconButton';
-import HomeIcon from 'styles/icons/Home';
+import HomeIcon from 'assets/icons/Home';
 
 const BTN_LABEL = 'Go back to your dashboard';
 

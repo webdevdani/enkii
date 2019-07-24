@@ -76,6 +76,10 @@ const GlobalStyles = createGlobalStyle`
     svg {
       fill: currentColor;
     }
+
+    img {
+        display: block;
+    }
 `;
 
 export default GlobalStyles;

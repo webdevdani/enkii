@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { CREATE_LIST } from 'constants/routes';
 import IconButton from 'components/common/IconButton';
-import PlusIcon from 'styles/icons/Plus';
+import PlusIcon from 'assets/icons/Plus';
 
 const BTN_LABEL = 'Make a new list';
 

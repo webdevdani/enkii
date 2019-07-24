@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import ImageUploadWrapper from 'components/common/ImageUploadWrapper';
 
-const listImagesPreset = process.env.REACT_APP_CLOUDINARY_LIST_IMAGES_UPLOAD_PRESET;
+export const listImagesPreset = process.env.REACT_APP_CLOUDINARY_LIST_IMAGES_UPLOAD_PRESET;
 
 const UploadButton = styled.button`
     border: 2px dashed #ccc;
@@ -15,7 +15,6 @@ const UploadButton = styled.button`
     padding: ${props => props.theme.paddingS};
     color: ${props => props.theme.darkBorderColor};
     outline: none;
-    margin-bottom: 1rem;
     font-size: 0.75rem;
 
     &:focus {
@@ -23,45 +22,36 @@ const UploadButton = styled.button`
     }
 `;
 
-class ImageUploadButton extends Component {
-    static propTypes = {
-        onImageUpload: PropTypes.func.isRequired,
-        children: PropTypes.node,
-        onUploadError: PropTypes.func,
-        uploadPreset: PropTypes.string,
-        widgetProps: PropTypes.object,
-    };
-
-    static defaultProps = {
-        children: 'Add Image',
-        onUploadError: console.error,
-        uploadPreset: listImagesPreset,
-        widgetProps: {},
-    };
-
-    handleImageUpload = (error, result) => {
-        if (result.event === 'success') {
-            this.props.onImageUpload(result.info.url);
-        } else if (error && error.message) {
-            this.props.onUploadError(error.message);
-        }
-    };
-
-    render() {
-        return (
-            <ImageUploadWrapper
-                uploadPreset={this.props.uploadPreset}
-                onUpload={this.handleImageUpload}
-                widgetProps={this.props.widgetProps}
-            >
-                {(openImageUploader) => (
-                    <UploadButton type="button" onClick={openImageUploader}>
-                        {this.props.children}
-                    </UploadButton>
-                )}
-            </ImageUploadWrapper>
-        );
-    }
+const ImageUploadButton = (props) => {
+    return (
+        <ImageUploadWrapper
+            uploadPreset={props.uploadPreset}
+            onUpload={props.onImageUpload}
+            onError={props.onUploadError}
+            widgetProps={props.widgetProps}
+        >
+            {(openImageUploader) => (
+                <UploadButton type="button" onClick={openImageUploader}>
+                    {props.children}
+                </UploadButton>
+            )}
+        </ImageUploadWrapper>
+    );
 }
+
+ImageUploadButton.propTypes = {
+    onImageUpload: PropTypes.func.isRequired,
+    children: PropTypes.node,
+    onUploadError: PropTypes.func,
+    uploadPreset: PropTypes.string,
+    widgetProps: PropTypes.object,
+};
+
+ImageUploadButton.defaultProps = {
+    children: 'Add Image',
+    onUploadError: console.error,
+    uploadPreset: listImagesPreset,
+    widgetProps: {},
+};
 
 export default ImageUploadButton;

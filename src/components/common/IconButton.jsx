@@ -7,7 +7,7 @@ import visuallyHiddenStyles from 'styles/mixins/visuallyHidden';
 const Btn = styled.button`
     border: none;
     background: none;
-    color: ${props => props.theme.iconColor};
+    color: ${props => props.color || props.theme.iconColor};
 `;
 
 const AccessibleLabel = styled.span`
@@ -24,6 +24,11 @@ const IconButton = ({ children, label, ...btnProps}) => (
 IconButton.propTypes = {
     children: PropTypes.node.isRequired,
     label: PropTypes.string.isRequired,
+    color: PropTypes.string,
+};
+
+IconButton.defaultProps = {
+    color: null,
 };
 
 export default IconButton;
