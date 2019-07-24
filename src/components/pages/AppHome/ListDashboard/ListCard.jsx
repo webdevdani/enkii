@@ -55,7 +55,9 @@ const ListCard = (props) => {
         shortFormatDate(props.createdAt.toDate())
     );
     const [trimmedDesc] = useState(
-        trimStringToLastWord(props.description, 115).concat('...')
+        props.description ?
+            trimStringToLastWord(props.description, 115).concat('...') :
+            null
     );
 
     return (
