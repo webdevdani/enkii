@@ -1,14 +1,16 @@
-export default function updateListItem(listItems, listItemOrder, listItemUpdate) {
+import { ID } from 'constants/schemas/listItem';
+
+export default function updateListItem(listItems, id, update = {}) {
     const listItemCount = listItems.length;
     const newListItems = [];
 
     for (let i = 0; i < listItemCount; i++) {
         let item = listItems[i];
 
-        if (item.order === listItemOrder) {
+        if (item[ID] === id) {
             item = {
                 ...item,
-                ...listItemUpdate,
+                ...update,
             };
         }
 

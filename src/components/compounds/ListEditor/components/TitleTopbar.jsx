@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
 import useListEditor from '../context/useListEditor';
-import { updateListTitle } from '../module/listActions';
+import { updateListTitle } from '../module/listReducer';
 import UnderlineInput from 'components/common/UnderlineInput';
 import Button from 'components/common/Button';
 

@@ -4,14 +4,16 @@ import styled from 'styled-components/macro';
 import * as KeyCode from 'keycode-js';
 import TextareaAutosize from 'react-autosize-textarea';
 
+import getListItemByOrder from '../../module/utils/getListItemByOrder';
 import { listPropType, TYPE, TYPE_OL } from 'constants/schemas/list';
 import baseInputStyles from 'styles/mixins/baseInputStyles';
 import headlineStyles from 'styles/mixins/headlineStyles';
 
-const getItemInputId = (order) => `list_item_${order}`;
+const getItemInputId = (id) => `list_item_${id}`;
 
-const focusListItemTitleInput = (order) => {
-    const input = document.getElementById(getItemInputId(order));
+const focusListItemTitleInputByOrder = (order) => {
+    const listItem = getListItemByOrder(order);
+    const input = document.getElementById(getItemInputId(listItem && listItem.id));
     input && input.focus();
 };
 
@@ -36,7 +38,7 @@ const ListItemInput = styled(TextareaAutosize)`
 
 const ListItemRow = (props) => {
     const handleTitleChange = (e) => {
-        props.onChange(props.order, { title: e.target.value });
+        props.onChange(props.id, { title: e.target.value });
     };
 
     const handleKeyDown = (e) => {
@@ -45,7 +47,7 @@ const ListItemRow = (props) => {
         if (keyCode === KeyCode.KEY_ENTER || keyCode === KeyCode.KEY_RETURN) {
             const newListItemOrder = props.order + 1;
             props.addNewListItem(newListItemOrder); // does this need to be a promise for focus to work?
-            focusListItemTitleInput(newListItemOrder);
+            focusListItemTitleInputByOrder(newListItemOrder);
 
             e.preventDefault();
             e.stopPropagation();
@@ -53,19 +55,19 @@ const ListItemRow = (props) => {
             // if at the first index of the input,
             // focus the previous ListItemInput, IF IT EXISTS
             if (e.target.selectionStart === 0) {
-                focusListItemTitleInput(props.order - 1);
+                focusListItemTitleInputByOrder(props.order - 1);
             }
         } else if (keyCode === KeyCode.KEY_DOWN) {
             // if at the last index of the input,
             // focus the next ListItemInput, IF IT EXISTS
             if (e.target.selectionStart === e.target.value.length) {
-                focusListItemTitleInput(props.order + 1);
+                focusListItemTitleInputByOrder(props.order + 1);
             }
         } else if (keyCode === KeyCode.KEY_DELETE || keyCode === KeyCode.KEY_BACK_SPACE) {
             // If all the text is deleted, remove the list item (unless it's the first)
             if (e.target.value.length === 0 && props.order !== 1) {
-                props.removeListItem(props.order);
-                focusListItemTitleInput(props.order - 1);
+                props.removeListItem(props.id);
+                focusListItemTitleInputByOrder(props.order - 1);
             }
         };
     };
@@ -77,7 +79,7 @@ const ListItemRow = (props) => {
                     {props.listType === TYPE_OL ? `${props.order}.` : '•'}
                 </ListItemLabelText>
                 <ListItemInput
-                    id={getItemInputId(props.order)}
+                    id={getItemInputId(props.id)}
                     value={props.title}
                     onChange={handleTitleChange}
                     placeholder="List Item Title"

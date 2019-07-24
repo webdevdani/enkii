@@ -25,7 +25,7 @@ const Card = styled.article`
     margin: 1rem 0;
 `;
 
-const ButtonGroup = styled(Link)`
+const ButtonGroup = styled.div`
     margin-top: auto;
     align-self: flex-end;
     ${props => gappedGroupStyles(props)}

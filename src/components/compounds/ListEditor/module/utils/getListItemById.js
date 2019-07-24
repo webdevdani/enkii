@@ -1,19 +1,19 @@
-import { ORDER } from 'constants/schemas/listItem';
+import { ID } from 'constants/schemas/listItem';
 
 /**
- * Gets the list item with the passed order
+ * Gets the list item with the passed id
  * @param  {array of objects}   listItems
- * @param  {string}      order
+ * @param  {string}      id
  * @return {object}             List item's value
  */
-export default function getListItemByOrder(listItems, order) {
+export default function getListItemById(listItems, id) {
     const listItemCount = listItems.length;
     let selectedListItem;
 
     for (let i = 0; i < listItemCount; i++) {
         const item = listItems[i];
 
-        if (item[ORDER] === order) {
+        if (item[ID] === id) {
             selectedListItem = item;
             break;
         }

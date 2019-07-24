@@ -4,8 +4,8 @@ import styled from 'styled-components/macro';
 
 import FadeIn from 'components/common/FadeIn';
 import useListEditor from '../../context/useListEditor';
-import { updateList, updateListItem } from '../../module/listActions';
-import getListItemByOrder from '../../module/utils/getListItemByOrder';
+import { updateList, updateListItem } from '../../module/listReducer';
+import getListItemById from '../../module/utils/getListItemById';
 import ListDetailsForm from '../ListDetailsForm';
 import ListItemDetailsForm from '../ListItemDetailsForm';
 
@@ -23,7 +23,7 @@ const MaxWidth = styled.div`
 const MainEditingSection = ({ activeListItem }) => {
     const { list, dispatch } = useListEditor();
     const { listItems } = list;
-    const activeListItemInfo = getListItemByOrder(listItems, activeListItem);
+    const activeListItemInfo = getListItemById(listItems, activeListItem);
 
     return (
         <Section>
@@ -34,10 +34,10 @@ const MainEditingSection = ({ activeListItem }) => {
                             <ListItemDetailsForm
                                 {...activeListItemInfo}
                                 listId={list.id}
-                                user={list.user}
+                                userId={list.userId}
                                 onChange={info => updateListItem(
                                     dispatch,
-                                    activeListItemInfo.order,
+                                    activeListItem,
                                     info,
                                 )}
                             />

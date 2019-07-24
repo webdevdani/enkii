@@ -1,4 +1,4 @@
-import listItemSchema from 'constants/schemas/listItem';
+import { createNewListItem, ORDER } from 'constants/schemas/listItem';
 
 /**
  * Accepts a list, and returns it with the list item
@@ -16,17 +16,18 @@ export default function addListItem(listItems, addItemAtOrder) {
         let item = listItems[i];
 
         if (addItemAtOrder && item.order === addItemAtOrder) {
-            newListItems.push({
-                ...listItemSchema,
-                order: orderCounter,
-            });
+            newListItems.push(
+                createNewListItem({
+                    [ORDER]: orderCounter,
+                }),
+            );
 
             orderCounter++;
         }
 
         newListItems.push({
             ...item,
-            order: orderCounter,
+            [ORDER]: orderCounter,
         });
 
         orderCounter++;
@@ -35,10 +36,11 @@ export default function addListItem(listItems, addItemAtOrder) {
     // Add the new item to the end of list
     // if unspecified order or a higher order than our list
     if (!addItemAtOrder || addItemAtOrder > listItemCount) {
-        newListItems.push({
-            ...listItemSchema,
-            order: orderCounter,
-        });
+        newListItems.push(
+            createNewListItem({
+                [ORDER]: orderCounter,
+            }),
+        );
     }
 
     return newListItems;

@@ -8,6 +8,8 @@ import ImageEditor from '../ImageEditor';
 
 import listSchema, {
     listPropType,
+    ID,
+    USER_ID,
     TITLE,
     IMAGE_URL,
     DESCRIPTION,
@@ -37,8 +39,8 @@ const ListSettingsFormSection = (props) => {
             <ImageEditor
                 src={props[IMAGE_URL]}
                 onChange={(img) => props.onChange({ [IMAGE_URL]: img })}
-                listId={props.id}
-                userId={props.user}
+                listId={props[ID]}
+                userId={props[USER_ID]}
             />
             <UnderlineInput
                 label="Description"
@@ -67,8 +69,8 @@ const ListSettingsFormSection = (props) => {
 }
 
 ListSettingsFormSection.propTypes = {
-    id: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
+    [ID]: PropTypes.string.isRequired,
+    [USER_ID]: PropTypes.string.isRequired,
     [TITLE]: listPropType[TITLE],
     [IMAGE_URL]: listPropType[IMAGE_URL],
     [DESCRIPTION]: listPropType[DESCRIPTION],

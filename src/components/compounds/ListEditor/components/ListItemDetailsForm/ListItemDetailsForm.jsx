@@ -31,7 +31,7 @@ const InputContainer = styled.div`
     flex-grow: 1;
 `;
 
-const ListItemForm = (props) => {
+const ListItemDetailsForm = (props) => {
     const listItemName = `listItem_${props.order}`;
     return (
         <FormSection name={listItemName}>
@@ -60,7 +60,7 @@ const ListItemForm = (props) => {
                     src={props[IMAGE_URL]}
                     onChange={(img) => props.onChange({ [IMAGE_URL]: img })}
                     listId={props.listId}
-                    userId={props.user}
+                    userId={props.userId}
                     listItemOrder={props[ORDER]}
                 />
                 <UnderlineInput
@@ -75,7 +75,7 @@ const ListItemForm = (props) => {
     );
 }
 
-ListItemForm.propTypes = {
+ListItemDetailsForm.propTypes = {
     [ORDER]: listItemPropType[ORDER].isRequired,
     [TITLE]: listItemPropType[TITLE],
     [URL]: listItemPropType[URL],
@@ -83,14 +83,14 @@ ListItemForm.propTypes = {
     [DESCRIPTION]: listItemPropType[DESCRIPTION],
     onChange: PropTypes.func.isRequired,
     listId: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
 };
 
-ListItemForm.defaultProps = {
+ListItemDetailsForm.defaultProps = {
     [TITLE]: listItemSchema[TITLE],
     [URL]: listItemSchema[URL],
     [IMAGE_URL]: listItemSchema[IMAGE_URL],
     [DESCRIPTION]: listItemSchema[DESCRIPTION],
 };
 
-export default ListItemForm;
+export default ListItemDetailsForm;

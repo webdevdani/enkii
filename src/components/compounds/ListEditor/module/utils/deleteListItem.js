@@ -1,3 +1,5 @@
+import { ORDER, ID } from 'constants/schemas/listItem';
+
 /**
  * Accepts a list, and returns it with the list item
  * removed, and the other items re-ordered
@@ -5,7 +7,7 @@
  * @param  {number} removeItemAtOrder  list item's order number
  * @return {object} list
  */
-export default function removeListItem(listItems, removeItemAtOrder) {
+export default function deleteListItem(listItems, removeId) {
     const listItemCount = listItems.length;
     const newListItems = [];
     let orderCounter = 1;
@@ -13,10 +15,10 @@ export default function removeListItem(listItems, removeItemAtOrder) {
     for (let i = 0; i < listItemCount; i++) {
         const item = listItems[i];
 
-        if (item.order !== removeItemAtOrder) {
+        if (item[ID] !== removeId) {
             newListItems.push({
                 ...item,
-                order: orderCounter,
+                [ORDER]: orderCounter,
             });
 
             orderCounter++;
