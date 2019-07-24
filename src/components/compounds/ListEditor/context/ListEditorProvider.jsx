@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { useFirebase } from 'modules/Firebase';
 import { useAuthUser } from 'modules/AuthUser';
 import { useGrowlSystem } from 'components/compounds/GrowlSystem';
-import listSchema from 'constants/schemas/list';
-import listItemSchema from 'constants/schemas/listItem';
+import { createNewList, ID, USER_ID } from 'constants/schemas/list';
 import ListEditorContext from './index';
 import listReducer, { SET_LIST, SET_IS_DIRTY, defaultState } from '../module/listReducer';
 
@@ -26,24 +25,12 @@ const ListEditorProvider = (props) => {
         }
 
         if (isTesting) {
-            const newList = {
-                ...listSchema,
-                listItems: [
-                    {
-                        ...listItemSchema,
-                        order: 1,
-                    },
-                    {
-                        ...listItemSchema,
-                        order: 2,
-                    },
-                ],
-                id: props.id || 'test',
-            };
-
             dispatch({
                 type: SET_LIST,
-                value: newList,
+                value: createNewList({
+                    [ID]: props.id || 'test',
+                    [USER_ID]: authUser.uid,
+                }),
             });
 
             return;
@@ -53,10 +40,17 @@ const ListEditorProvider = (props) => {
             firebase.getList(props.id)
                 .then((list) => {
                     if (list.exists) {
+                        const listData = list.data();
+
+                        // Only allow edit access if the list matches the authed user's id
+                        if (authUser.uid !== listData[USER_ID]) {
+                            props.onListNotExisting();
+                        }
+
                         dispatch({
                             type: SET_LIST,
                             value: {
-                                ...list.data(),
+                                ...listData,
                                 id: list.id,
                             },
                         });

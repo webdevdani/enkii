@@ -3,8 +3,12 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 // import { OWNER } from 'constants/roles';
-import listSchema, { LIST_ITEMS, USER_ID, CREATED_AT, MODIFIED_AT } from 'constants/schemas/list';
-import listItemSchema, { ORDER } from 'constants/schemas/listItem';
+import {
+    createNewList as createNewListObject,
+    USER_ID,
+    CREATED_AT,
+    MODIFIED_AT,
+} from 'constants/schemas/list';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -51,31 +55,25 @@ class Firebase {
     /* *** Writing data *** */
 
     createNewList = (userId) => {
-        return this.db.collection(LISTS).add({
-            ...listSchema,
-            [USER_ID]: userId || this.getAuthedUserId(),
-            [CREATED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
-            [LIST_ITEMS]: [{
-                ...listItemSchema,
-                [ORDER]: 1,
-            }],
-        }).then(listRef => listRef.get());
-        // need to associate the list to the user?
-        // or get collection where userId = authed user?
+        return this.db.collection(LISTS)
+            .add(createNewListObject({
+                [USER_ID]: userId || this.getAuthedUserId(),
+                [CREATED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
+            }))
+            .then(listRef => listRef.get());
     };
 
     saveList = (listId, data) => {
-        const listCollection = this.db.collection(LISTS);
-        return listCollection.doc(listId).set({
-            ...data,
-            [MODIFIED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
-        });
+        return this.db.collection(LISTS)
+            .doc(listId)
+            .set({
+                ...data,
+                [MODIFIED_AT]: firebase.firestore.FieldValue.serverTimestamp(),
+            });
     };
 
     deleteList = (listId) => {
-        // remove list from user
-        // remove list
-        // remove listItem
+        // delete list document
     };
 
 

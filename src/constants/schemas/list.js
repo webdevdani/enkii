@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 
-import { listItemPropType } from './listItem';
+import { listItemPropType, createNewListItem } from './listItem';
 
+export const ID = 'id';
 export const TITLE = 'title';
 export const IMAGE_URL = 'imageUrl';
 export const DESCRIPTION = 'description';
@@ -16,6 +17,7 @@ export const TYPE_OL = 'ol';
 export const TYPE_UL = 'ul';
 
 export const listPropType = {
+    [ID]: PropTypes.string,
     [TITLE]: PropTypes.string,
     [IMAGE_URL]: PropTypes.string,
     [DESCRIPTION]: PropTypes.string,
@@ -38,5 +40,13 @@ const schema = {
     [LIST_ITEMS]: [],
     [PRIVACY]: 'public',
 };
+
+export function createNewList(options = {}) {
+    return {
+        ...schema,
+        [LIST_ITEMS]: [createNewListItem()],
+        ...options,
+    };
+}
 
 export default schema;

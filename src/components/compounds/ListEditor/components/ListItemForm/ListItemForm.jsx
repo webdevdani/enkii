@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
+import Button from 'components/common/Button';
 import useListEditor from '../../context/useListEditor';
 import {
     updateListItem,
     addListItem,
     deleteListItem,
-} from '../../module/listActions';
+} from '../../module/listReducer';
 import ListItemRow from './ListItemRow';
 
 const Sidebar = styled.aside`
@@ -16,39 +17,43 @@ const Sidebar = styled.aside`
     min-width: 250px;
 `;
 
+const ButtonWrapper = styled.div`
+    padding: 1rem;
+`;
+
 const ListItemForm = (props) => {
     const { list, dispatch } = useListEditor();
     const { listItems } = list;
     const handleAddListItem = order => addListItem(dispatch, order);
-    const handleRemoveListItem = order => deleteListItem(dispatch, order);
-    const handleListItemChange = (order, updateInfo) => {
-        updateListItem(dispatch, order, updateInfo);
+    const handleRemoveListItem = id => deleteListItem(dispatch, id);
+    const handleListItemChange = (id, updateInfo) => {
+        updateListItem(dispatch, id, updateInfo);
     };
 
     return (
         <Sidebar>
             {!!listItems.length && listItems.map(item => (
                 <ListItemRow
-                    id={item.order}
-                    key={item.order}
+                    {...item}
+                    key={item.id}
                     onChange={handleListItemChange}
                     addNewListItem={handleAddListItem}
                     removeListItem={handleRemoveListItem}
-                    selectListItem={() => props.setActiveListItem(item.order)}
+                    selectListItem={() => props.setActiveListItem(item.id)}
                     listType={list.type}
-                    {...item}
                 />
             ))}
+            <ButtonWrapper>
+                <Button type="button" onClick={() => handleAddListItem()} secondary fullWidth>
+                    Add a List Item
+                </Button>
+            </ButtonWrapper>
         </Sidebar>
     );
 }
 
 ListItemForm.propTypes = {
     setActiveListItem: PropTypes.func.isRequired,
-};
-
-ListItemForm.defaultProps = {
-
 };
 
 export default ListItemForm;

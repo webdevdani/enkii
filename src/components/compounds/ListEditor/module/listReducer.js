@@ -1,9 +1,7 @@
-import listSchema from 'constants/schemas/list';
-import removeListItem from './utils/removeListItem';
-import addListItem from './utils/addListItem';
-import updateListItem from './utils/updateListItem';
+import deleteListItemHelper from './utils/deleteListItem';
+import addListItemHelper from './utils/addListItem';
+import updateListItemHelper from './utils/updateListItem';
 
-export const CREATE_NEW_LIST = 'createList';
 export const SET_LIST = 'setList';
 export const UPDATE_LIST = 'updateList';
 export const UPDATE_LIST_TITLE = 'updateListTitle';
@@ -29,11 +27,6 @@ const listReducer = (state, action) => {
                 ...state,
                 [LIST]: action.value,
             };
-        case CREATE_NEW_LIST:
-            return {
-                ...state,
-                [LIST]: { ...listSchema },
-            };
         case UPDATE_LIST:
             return {
                 ...state,
@@ -57,7 +50,7 @@ const listReducer = (state, action) => {
                 ...state,
                 [LIST]: {
                     ...state[LIST],
-                    [LIST_ITEMS]: addListItem(state[LIST][LIST_ITEMS], action.order),
+                    [LIST_ITEMS]: addListItemHelper(state[LIST][LIST_ITEMS], action.order),
                 },
                 [IS_DIRTY]: true,
             };
@@ -67,7 +60,7 @@ const listReducer = (state, action) => {
                 ...state,
                 [LIST]: {
                     ...state[LIST],
-                    [LIST_ITEMS]: removeListItem(state[LIST][LIST_ITEMS], action.order),
+                    [LIST_ITEMS]: deleteListItemHelper(state[LIST][LIST_ITEMS], action.id),
                 },
                 [IS_DIRTY]: true,
             };
@@ -76,9 +69,9 @@ const listReducer = (state, action) => {
                 ...state,
                 [LIST]: {
                     ...state[LIST],
-                    [LIST_ITEMS]: updateListItem(
+                    [LIST_ITEMS]: updateListItemHelper(
                         state[LIST][LIST_ITEMS],
-                        action.order,
+                        action.id,
                         action.value,
                     ),
                 },
@@ -90,23 +83,44 @@ const listReducer = (state, action) => {
                 [IS_DIRTY]: action.value,
             };
         default:
-            // throw new Error('No valid action passed');
             return state;
     }
 };
 
-/*
+export const updateList = (dispatch, listInfo = {}) => {
+    dispatch({
+        type: UPDATE_LIST,
+        value: listInfo,
+    });
+};
 
-List editor needs to be able to:
+export const updateListTitle = (dispatch, title = '') => {
+    dispatch({
+        type: UPDATE_LIST_TITLE,
+        value: title,
+    });
+};
 
-add new list item
-update list info
-update list item info
-delete list item
+export const addListItem = (dispatch, itemOrder) => {
+    dispatch({
+        type: ADD_LIST_ITEM,
+        order: itemOrder,
+    });
+};
 
-reorder list items <--------- (reuse update list item info?)
+export const deleteListItem = (dispatch, id) => {
+    dispatch({
+        type: DELETE_LIST_ITEM,
+        id: id,
+    });
+};
 
-
-*/
+export const updateListItem = (dispatch, id, update = {}) => {
+    dispatch({
+        type: UPDATE_LIST_ITEM,
+        id: id,
+        value: update,
+    });
+};
 
 export default listReducer;
