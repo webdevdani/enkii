@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-import { OWNER } from 'constants/roles';
+// import { OWNER } from 'constants/roles';
 import listSchema, { LIST_ITEMS } from 'constants/schemas/list';
 import listItemSchema, { ORDER } from 'constants/schemas/listItem';
 
@@ -16,7 +16,7 @@ const config = {
 };
 
 // Database Keys
-const USERS = 'users';
+// const USERS = 'users';
 const LISTS = 'lists';
 
 class Firebase {

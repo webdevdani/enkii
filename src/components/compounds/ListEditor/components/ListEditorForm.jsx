@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
-import {
-    addListItem,
-    updateListItem,
-    updateList,
-} from '../module/listActions';
 import useListEditor from '../context/useListEditor';
 
 import TitleTopbar from './TitleTopbar';
@@ -27,8 +21,7 @@ const EditorForm = styled.form`
 `;
 
 const ListEditorForm = () => {
-    const { dispatch, list, saveList, isDirty } = useListEditor();
-    const { listItems, ...listProps } = list;
+    const { list, saveList, isDirty } = useListEditor();
     const [activeListItem, setActiveListItem] = useState(null);
 
     return (

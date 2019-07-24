@@ -1,5 +1,4 @@
 import listSchema from 'constants/schemas/list';
-import listItemSchema  from 'constants/schemas/listItem';
 import removeListItem from './utils/removeListItem';
 import addListItem from './utils/addListItem';
 import updateListItem from './utils/updateListItem';
