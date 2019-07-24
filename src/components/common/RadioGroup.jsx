@@ -18,6 +18,10 @@ const RadioWrapper = styled.div`
     margin-right: ${props => props.theme.paddingM};
 `;
 
+const RadioOptionLabel = styled.label`
+    padding-left: ${props => props.theme.paddingXs};
+`;
+
 const RadioGroup = (props) => (
     <fieldset>
         <SideLabelInputWrapper
@@ -36,9 +40,9 @@ const RadioGroup = (props) => (
                             checked={option.value === props.value}
                             {...option}
                         />
-                        <label htmlFor={option.value}>
+                        <RadioOptionLabel htmlFor={option.value}>
                             {option.label}
-                        </label>
+                        </RadioOptionLabel>
                     </RadioWrapper>
                 ))}
             </RadioOptionGroup>
