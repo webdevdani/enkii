@@ -6,7 +6,7 @@ const formContainer = (props) => `
     margin: ${props.theme.paddingM} auto;
     padding: ${props.theme.paddingM};
 
-    ${StyledLabel} {
+    label {
         margin-bottom: ${props.theme.paddingM};
     }
 `;

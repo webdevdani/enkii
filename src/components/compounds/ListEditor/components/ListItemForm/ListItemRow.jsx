@@ -32,6 +32,7 @@ const ListItemLabelText = styled.span`
 `;
 const ListItemInput = styled(TextareaAutosize)`
     ${props => baseInputStyles(props)}
+    background: none;
     border: none;
     resize: none;
 `;
