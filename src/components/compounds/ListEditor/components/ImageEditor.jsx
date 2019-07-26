@@ -15,7 +15,7 @@ import getPublicIdFromCloudinaryUrl from 'utils/getPublicIdFromCloudinaryUrl';
 
 const EditToolsWrapper = styled.div`
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     transition: opacity 0.5s;
     display: flex;
@@ -26,7 +26,7 @@ const EditToolsWrapper = styled.div`
     justify-content: flex-end;
 
     svg {
-        color: ${props => props.theme.lightFontColor};
+        color: ${props => props.theme.accentColor};
     }
 `;
 
@@ -45,6 +45,12 @@ const ImageWrapper = styled.div`
     }
 `;
 
+const ImageEditorWrapper = styled.div`
+    margin-bottom: ${props => props.theme.paddingM};
+    border-radius: ${props => props.theme.imageBorderRadius};
+    overflow: hidden;
+`;
+
 const ImageEditor = (props) => {
     const widgetProps = {
         publicId: `${props.userId}_${props.listId}_${props.listItemOrder}`,
@@ -58,7 +64,7 @@ const ImageEditor = (props) => {
     };
 
     return (
-        <div style={{ marginBottom: '1rem' }}>
+        <ImageEditorWrapper>
             {props.src ?
                 (
                     <ImageUploadWrapper
@@ -95,7 +101,7 @@ const ImageEditor = (props) => {
                     />
                 )
             }
-        </div>
+        </ImageEditorWrapper>
     );
 }
 

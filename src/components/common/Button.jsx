@@ -7,14 +7,22 @@ const Button = styled.button`
     font-size: ${props => props.size === SMALL ? '0.55rem' : '0.75rem'};
     font-weight: 600;
     background-color: ${props => props.secondary ? 'transparent' : props.theme.accentColor};
-    border: 1px solid ${props => props.theme.accentColor};
-    color: ${props => props.secondary ? props.theme.accentColor : props.theme.lightFontColor};
+    border: 2px solid ${props => props.theme.accentColor};
+    color: ${props => props.theme.fontColor};
     border-radius: ${props => props.theme.borderRadius};
     padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
     ${props => props.fullWidth ? `width: 100%;` : ''}
     line-height: 1;
     opacity: ${props => props.disabled ? '0.6': '1'};
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, border 0.3s ease-in-out, background 0.3s ease-in-out;
+
+    &:hover {
+        border-color: ${props => props.theme.darkerAccentColor};
+
+        ${props => !props.secondary &&
+            `background-color: ${props.theme.darkerAccentColor};`
+        }
+    }
 `;
 
 Button.propTypes = {

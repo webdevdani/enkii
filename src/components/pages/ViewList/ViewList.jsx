@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+import TopNavigation from 'components/templates/TopNavigation';
 import { useFirebase } from 'modules/Firebase';
 import { useAuthUser } from 'modules/AuthUser';
 import FadeIn from 'components/common/FadeIn';
 import ListArticle from './ListArticle';
 
-// if list doesnt exist, send to 404
+// if list doesnt exist,
+// Send to home page with growl saying it doesnt exist
 
 const ViewList = (props) => {
     const firebase = useFirebase();
@@ -23,16 +25,18 @@ const ViewList = (props) => {
                     setIsLoading(false);
                 }
             });
-    });
+    }, [props.match.params.id]);
 
     if (isLoading) {
         return null;
     }
 
     return (
-        <FadeIn>
-            <ListArticle {...list} />
-        </FadeIn>
+        <TopNavigation>
+            <FadeIn>
+                <ListArticle {...list} />
+            </FadeIn>
+        </TopNavigation>
     );
 }
 
@@ -43,7 +47,6 @@ ViewList.propTypes = {
         }),
     }),
     history: PropTypes.shape({
-        replace: PropTypes.func.isRequired,
         push: PropTypes.func.isRequired,
     }),
 

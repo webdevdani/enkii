@@ -19,6 +19,7 @@ const Card = styled.article`
     border: ${props => props.theme.baseBorder};
     border-radius: ${props => props.theme.borderRadius};
     padding: ${props => props.theme.paddingM};
+    background: ${props => props.theme.contentBackground};
     min-height: 150px;
     display: flex;
     flex-direction: column;
