@@ -25,7 +25,9 @@ export const listPropType = {
         TYPE_OL,
         TYPE_UL,
     ]),
-    [LIST_ITEMS]: PropTypes.arrayOf(listItemPropType),
+    [LIST_ITEMS]: PropTypes.arrayOf(
+        PropTypes.shape(listItemPropType)
+    ),
     [PRIVACY]: PropTypes.string,
     [USER_ID]: PropTypes.string,
     [CREATED_AT]: PropTypes.string,

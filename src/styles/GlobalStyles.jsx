@@ -63,10 +63,12 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${props => props.theme.fontFamily};
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background: ${props => props.theme.appBackground};
     }
 
     input, textarea, select, button {
         font-family: inherit;
+        background: none;
     }
 
     input {

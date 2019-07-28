@@ -8,6 +8,7 @@ const underlineInput = props => `
     outline: none;
     transition: border-color ${props.theme.shortTransitionDuration};
     ${props.noMargin ? '' : `margin-bottom: ${props.theme.paddingM};`}
+    background: none;
 
     ${placeholder(`
         color: ${props.theme.borderColor};

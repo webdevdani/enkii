@@ -1,7 +1,5 @@
 import React from 'react';
 
-import withAuthorization from 'modules/Authorization';
-import { APP } from 'constants/routes';
 import TopNavigation from 'components/templates/TopNavigation';
 
 const Landing = (props) => {
@@ -12,6 +10,4 @@ const Landing = (props) => {
     );
 }
 
-const condition = authUser => !!authUser ? APP : null;
-
-export default withAuthorization(condition)(Landing);
+export default Landing;

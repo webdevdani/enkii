@@ -11,8 +11,8 @@ import ListCard from './ListCard';
 const ButtonWrapper = styled.div`
     text-align: center;
     margin: 3rem 0;
-    padding: 3rem 0 0;
-    border-top: ${props => props.theme.baseBorder};
+    padding: 2rem 0 0;
+    border-top: ${props => props.theme.dividerBorder};
 `;
 
 const ListCollectionView = (props) => {

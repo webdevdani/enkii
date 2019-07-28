@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
-import { LANDING, APP } from 'constants/routes';
+import { HOME, DASHBOARD } from 'constants/routes';
 import { useAuthUser } from 'modules/AuthUser';
 
 const PageCenter = styled.main`
@@ -32,7 +32,7 @@ const PageNotFound = (props) => {
         <PageCenter>
             <div>
                 <FourOhFour>404</FourOhFour>
-                <p>Page not found. <Link to={authUser ? APP : LANDING}>Go home.</Link></p>
+                <p>Page not found. <Link to={authUser ? DASHBOARD : HOME}>Go home.</Link></p>
             </div>
         </PageCenter>
     );

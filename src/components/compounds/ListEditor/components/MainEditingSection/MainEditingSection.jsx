@@ -13,6 +13,8 @@ const Section = styled.section`
     padding: 1rem;
     flex-grow: 1;
     border-left: ${props => props.theme.baseBorder};
+    overflow: scroll;
+    background: ${props => props.theme.contentBackground};
 `;
 
 const MaxWidth = styled.div`

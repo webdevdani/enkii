@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import withAuthorization from 'modules/Authorization';
-import { SIGN_IN, APP } from 'constants/routes';
+import { SIGN_IN, DASHBOARD } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import AccountHeader from './AccountHeader';
 import AccountView from './AccountView';
@@ -14,7 +14,7 @@ const Account = (props) => {
     return (
         <LeftSidebar
             sidebarContent={
-                <Link to={APP}>Home</Link>
+                <Link to={DASHBOARD}>Home</Link>
             }
         >
             <AccountHeader

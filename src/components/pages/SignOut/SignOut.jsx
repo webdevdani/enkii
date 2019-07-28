@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import withAuthorization from 'modules/Authorization';
-import { LANDING } from 'constants/routes';
+import { HOME } from 'constants/routes';
 import { useFirebase } from 'modules/Firebase';
 
 const SignOut = (props) => {
@@ -14,6 +14,6 @@ const SignOut = (props) => {
     return null;
 }
 
-const condition = authUser => !authUser ? LANDING : null;
+const condition = authUser => !authUser ? HOME : null;
 
 export default withAuthorization(condition)(SignOut);
