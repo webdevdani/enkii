@@ -1,7 +1,7 @@
 import React from 'react';
 
 import withAuthorization from 'modules/Authorization';
-import { APP, SIGN_IN } from 'constants/routes';
+import { DASHBOARD, SIGN_IN } from 'constants/routes';
 import LeftSidebar from 'components/templates/LeftSidebar';
 
 const Admin = (props) => {
@@ -19,7 +19,7 @@ const condition = authUser => {
         return SIGN_IN;
     } else if (authUser) {
         // check permission for admin
-        return APP;
+        return DASHBOARD;
     }
 
     return null;

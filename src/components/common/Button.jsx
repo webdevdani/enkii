@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
-export const SMALL = 'small';
+export const SIZE_SMALL = 'small';
 
 const Button = styled.button`
-    font-size: ${props => props.size === SMALL ? '0.55rem' : '0.75rem'};
+    font-size: ${props => props.size === SIZE_SMALL ? '0.55rem' : '0.75rem'};
     font-weight: 600;
     background-color: ${props => props.secondary ? 'transparent' : props.theme.accentColor};
     border: 2px solid ${props => props.theme.accentColor};
@@ -27,7 +27,7 @@ const Button = styled.button`
 
 Button.propTypes = {
     size: PropTypes.oneOf([
-        SMALL,
+        SIZE_SMALL,
     ]),
     secondary: PropTypes.bool,
     fullWidth: PropTypes.bool,

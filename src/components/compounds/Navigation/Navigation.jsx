@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 
-import {
-    LANDING,
-    SIGN_IN,
-    SIGN_UP,
-} from 'constants/routes';
 import gappedGroupStyles from 'styles/mixins/gappedGroup';
+import { useAuthUser } from 'modules/AuthUser';
+import Logo from 'components/common/Logo';
+import LoggedOutNavActions from './LoggedOutNavActions';
+import LoggedInNavActions from './LoggedInNavActions';
 
 const NavigationList = styled.ul`
     ${props => gappedGroupStyles(props)}
@@ -22,18 +21,29 @@ const Nav = styled.nav`
     padding: ${props => props.theme.paddingM};
 `;
 
-const Navigation = () => (
-    <Nav>
-        <NavLink exact to={LANDING}>enkii</NavLink>
-        <NavigationList>
-            <li>
-                <NavLink to={SIGN_IN}>Sign In</NavLink>
-            </li>
-            <li>
-                <NavLink to={SIGN_UP}>Sign Up</NavLink>
-            </li>
-        </NavigationList>
-    </Nav>
-);
+const Navigation = (props) => {
+    const authUser = useAuthUser();
+
+    return (
+        <Nav>
+            <Logo />
+            <NavigationList>
+                {authUser ?
+                    <LoggedInNavActions /> :
+                    <LoggedOutNavActions />
+                }
+                {props.children}
+            </NavigationList>
+        </Nav>
+    );
+}
+
+Navigation.propTypes = {
+    children: PropTypes.node,
+};
+
+Navigation.defaultProps = {
+    children: null,
+};
 
 export default Navigation;

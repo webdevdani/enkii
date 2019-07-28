@@ -6,7 +6,7 @@ import { SIGN_IN, EDIT_LIST, PAGE_NOT_FOUND } from 'constants/routes';
 import withAuthorization from 'modules/Authorization';
 import LeftSidebar from 'components/templates/LeftSidebar';
 import ListEditor, { ListEditorProvider } from 'components/compounds/ListEditor';
-import HomeButton from './HomeButton';
+import HomeButton from 'components/common/HomeButton';
 
 const EditList = (props) => {
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 import withAuthorization from 'modules/Authorization';
-import { APP } from 'constants/routes';
+import { DASHBOARD } from 'constants/routes';
 import TopNavigation from 'components/templates/TopNavigation';
 import Headline, { SIZE_LARGE } from 'components/common/Headline';
 import PasswordForgetForm from './PasswordForgetForm';
@@ -21,6 +21,6 @@ const PasswordForget = () => (
     </TopNavigation>
 );
 
-const condition = authUser => !!authUser ? APP : null;
+const condition = authUser => !!authUser ? DASHBOARD : null;
 
 export default withAuthorization(condition)(PasswordForget);
