@@ -37,4 +37,5 @@ export default {
     shortTransitionDuration: '300ms',
 
     readingWidth: '600px',
+    maxContentWidth: '900px',
 };

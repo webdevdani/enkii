@@ -16,9 +16,22 @@ const NavigationList = styled.ul`
 `;
 
 const Nav = styled.nav`
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: ${props => props.theme.contentBackground};
+    border-bottom: ${props => props.theme.baseBorder};
+    border-top: 4px solid ${props => props.theme.accentColor};
+    padding: ${props => `${props.theme.paddingS} ${props.theme.paddingM}`};
+`;
+
+const ContentContainer = styled.div`
+    max-width: ${props => props.theme.maxContentWidth};
+    margin: auto;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: ${props => props.theme.paddingM};
+    align-items: center;
 `;
 
 const Navigation = (props) => {
@@ -26,14 +39,16 @@ const Navigation = (props) => {
 
     return (
         <Nav>
-            <Logo />
-            <NavigationList>
-                {authUser ?
-                    <LoggedInNavActions /> :
-                    <LoggedOutNavActions />
-                }
-                {props.children}
-            </NavigationList>
+            <ContentContainer>
+                <Logo />
+                <NavigationList>
+                    {authUser ?
+                        <LoggedInNavActions /> :
+                        <LoggedOutNavActions />
+                    }
+                    {props.children}
+                </NavigationList>
+            </ContentContainer>
         </Nav>
     );
 }
