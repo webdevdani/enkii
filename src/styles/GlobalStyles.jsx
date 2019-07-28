@@ -82,6 +82,10 @@ const GlobalStyles = createGlobalStyle`
     img {
         display: block;
     }
+
+    a {
+        color: ${props => props.theme.popColor};
+    }
 `;
 
 export default GlobalStyles;
